@@ -69,32 +69,20 @@ export default function Hero() {
           minHeight: 'calc(100vh - 72px)',
           paddingBottom: '40px',
         }}>
-          {/* Photo */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
-            <div style={{
-              width: '100%', maxWidth: '480px',
-              aspectRatio: '3/4',
-              background: 'linear-gradient(180deg, rgba(110,168,222,0.08) 0%, rgba(10,20,40,0.3) 100%)',
-              borderRadius: '20px',
-              display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
-              overflow: 'hidden',
-              border: '1px solid rgba(110,168,222,0.15)',
-            }}>
-              {/* Replace with: <img src="/photo-dorit.png" alt="Дорит Гитерман" style={{width:'100%',height:'100%',objectFit:'cover'}} /> */}
-              <img
-                src="/photo-dorit.png"
-                alt="Дорит Гитерман — адвокат"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
-                onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }}
-              />
-              <div style={{
-                display: 'none', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                width: '100%', height: '100%', color: 'rgba(255,255,255,0.25)', fontSize: '0.9rem', gap: '8px',
-              }}>
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(110,168,222,0.3)" strokeWidth="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-                Фото адвоката
-              </div>
-            </div>
+          {/* Photo — transparent PNG floats on dark bg */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', height: '100%', minHeight: '420px' }}>
+            <img
+              src="/photo-dorit.png"
+              alt="Дорит Гитерман — адвокат"
+              style={{
+                maxWidth: '100%',
+                maxHeight: '75vh',
+                objectFit: 'contain',
+                objectPosition: 'bottom center',
+                display: 'block',
+                filter: 'drop-shadow(0 8px 32px rgba(0,0,0,0.4))',
+              }}
+            />
           </div>
 
           {/* Content */}

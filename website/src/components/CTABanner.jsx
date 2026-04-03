@@ -32,7 +32,7 @@ export default function CTABanner() {
             </a>
           </div>
 
-          {/* Right: Photo */}
+          {/* Right: Photo — transparent PNG on dark bg */}
           <div style={{
             background: 'linear-gradient(135deg, #1a2f50, #0c1829)',
             display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
@@ -41,16 +41,17 @@ export default function CTABanner() {
             <img
               src="/photo-dorit-cta.png"
               alt="Дорит Гитерман"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
-              onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }}
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                width: 'auto',
+                height: '100%',
+                objectFit: 'contain',
+                objectPosition: 'bottom center',
+                display: 'block',
+                filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.5))',
+              }}
             />
-            <div style={{
-              display: 'none', alignItems: 'center', justifyContent: 'center',
-              position: 'absolute', inset: 0, color: 'rgba(255,255,255,0.2)', fontSize: '0.85rem', flexDirection: 'column', gap: '8px',
-            }}>
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(110,168,222,0.3)" strokeWidth="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-              Фото
-            </div>
           </div>
         </div>
       </div>
