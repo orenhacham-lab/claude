@@ -11,7 +11,7 @@ const NAV_LINKS = [
 
 function ScalesIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6ea8de" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#6ea8de" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <line x1="12" y1="3" x2="12" y2="21"/>
       <path d="M3 10l9-7 9 7"/>
       <path d="M3 14c0 2 1.5 3 3 3s3-1 3-3L6 10z"/>
@@ -23,7 +23,7 @@ function ScalesIcon() {
 
 function PhoneIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18.01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.07-.54a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
     </svg>
   )
@@ -72,49 +72,63 @@ export default function Navbar() {
       borderBottom: '1px solid rgba(110,168,222,0.12)',
       transition: 'background 0.3s',
     }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px', gap: '16px' }}>
+      <div className="container" style={{
+        display: 'flex', alignItems: 'center',
+        justifyContent: 'space-between', height: '72px', gap: '12px',
+      }}>
 
         {/* Logo */}
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '11px', flexShrink: 0, textDecoration: 'none' }}>
           <ScalesIcon />
-          <div>
-            <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>Дорит Гитерман</div>
-            <div style={{ fontSize: '0.72rem', color: '#6ea8de', fontWeight: 400, lineHeight: 1.2 }}>Адвокат по уголовным делам</div>
+          <div style={{ lineHeight: 1 }}>
+            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '3px' }}>Дорит Гитерман</div>
+            <div style={{ fontSize: '0.7rem', color: '#6ea8de', fontWeight: 400 }}>Адвокат по уголовным делам</div>
           </div>
         </a>
 
-        {/* Desktop nav */}
-        <ul style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'nowrap' }} className="desktop-nav">
-          {NAV_LINKS.map(link => (
-            <li key={link.label}>
+        {/* Desktop nav with pipe separators */}
+        <ul style={{ display: 'flex', alignItems: 'center', margin: 0, padding: 0 }} className="desktop-nav">
+          {NAV_LINKS.map((link, i) => (
+            <li key={link.label} style={{ display: 'flex', alignItems: 'center' }}>
               <a
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
                 style={{
-                  color: 'rgba(255,255,255,0.8)', fontSize: '0.88rem', padding: '6px 10px',
-                  borderRadius: '6px', transition: 'color .2s', whiteSpace: 'nowrap',
+                  color: 'rgba(255,255,255,0.75)', fontSize: '0.86rem',
+                  padding: '6px 9px', whiteSpace: 'nowrap', transition: 'color .2s',
                 }}
                 onMouseEnter={e => e.target.style.color = '#fff'}
-                onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.8)'}
+                onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.75)'}
               >
                 {link.label}
               </a>
+              {i < NAV_LINKS.length - 1 && (
+                <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.85rem', userSelect: 'none' }}>|</span>
+              )}
             </li>
           ))}
         </ul>
 
         {/* Phone + CTA */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
-          <a href="tel:054-2002707" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', whiteSpace: 'nowrap' }}>
+          <a href="tel:054-2002707" style={{
+            display: 'flex', alignItems: 'center', gap: '6px',
+            color: 'rgba(255,255,255,0.8)', fontSize: '0.88rem', whiteSpace: 'nowrap',
+          }}>
             <PhoneIcon />
             <span className="phone-text">054-2002707</span>
           </a>
-          <a href="#contact" onClick={(e) => { e.preventDefault(); handleNavClick('#contact') }} className="btn-outline" style={{ fontSize: '0.82rem', padding: '9px 18px' }}>
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); handleNavClick('#contact') }}
+            className="btn-outline"
+            style={{ fontSize: '0.82rem', padding: '9px 18px', whiteSpace: 'nowrap' }}
+          >
             Консультация
           </a>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{ color: '#fff', display: 'none' }}
+            style={{ color: '#fff', display: 'none', background: 'none', border: 'none', cursor: 'pointer' }}
             className="hamburger"
             aria-label="Меню"
           >
@@ -125,17 +139,14 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div style={{
-          background: '#0a1525', borderTop: '1px solid rgba(110,168,222,0.15)',
-          padding: '16px 28px 24px',
-        }}>
+        <div style={{ background: '#0a1525', borderTop: '1px solid rgba(110,168,222,0.15)', padding: '16px 28px 24px' }}>
           {NAV_LINKS.map(link => (
             <a
               key={link.label}
               href={link.href}
               onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
               style={{
-                display: 'block', padding: '12px 0',
+                display: 'block', padding: '13px 0',
                 color: 'rgba(255,255,255,0.85)', fontSize: '1rem',
                 borderBottom: '1px solid rgba(255,255,255,0.07)',
               }}
@@ -143,14 +154,17 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a href="tel:054-2002707" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#6ea8de', marginTop: '16px', fontWeight: 600 }}>
+          <a href="tel:054-2002707" style={{
+            display: 'flex', alignItems: 'center', gap: '8px',
+            color: '#6ea8de', marginTop: '18px', fontWeight: 600,
+          }}>
             <PhoneIcon /> 054-2002707
           </a>
         </div>
       )}
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 960px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
           .phone-text { display: none; }

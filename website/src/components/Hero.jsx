@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 function GlobeIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="10"/>
       <line x1="2" y1="12" x2="22" y2="12"/>
       <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
@@ -12,7 +12,7 @@ function GlobeIcon() {
 
 function ScalesIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <line x1="12" y1="3" x2="12" y2="21"/>
       <path d="M3 10l9-7 9 7"/>
       <path d="M3 14c0 2 1.5 3 3 3s3-1 3-3L6 10z"/>
@@ -24,7 +24,7 @@ function ScalesIcon() {
 
 function ClockIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="10"/>
       <polyline points="12 6 12 12 16 14"/>
     </svg>
@@ -32,131 +32,157 @@ function ClockIcon() {
 }
 
 const FEATURES = [
-  { icon: <ScalesIcon />, text: '25 лет опыта', sub: 'в уголовном праве' },
-  { icon: <GlobeIcon />,  text: 'Ведение дел', sub: 'на русском, иврите, английском' },
-  { icon: <ClockIcon />,  text: 'Доступность 24/7', sub: 'в экстренных ситуациях' },
+  { icon: <ScalesIcon />, line1: '25 лет опыта', line2: 'в уголовном праве' },
+  { icon: <GlobeIcon />,  line1: 'Ведение дел на', line2: 'иврите, рус., англ.' },
+  { icon: <ClockIcon />,  line1: 'Доступность 24/7', line2: 'в экстренных ситуациях' },
 ]
 
 export default function Hero() {
   const [form, setForm] = useState({ name: '', phone: '' })
   const [sent, setSent] = useState(false)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setSent(true)
-  }
+  const HERO_H = 'calc(100vh - 72px)'
 
   return (
     <section style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #08111f 0%, #0c1829 50%, #0e1e35 100%)',
-      display: 'flex', alignItems: 'center',
-      paddingTop: '72px', position: 'relative', overflow: 'hidden',
+      background: '#0b1729',
+      paddingTop: '72px',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
-      {/* Subtle background overlay */}
+      {/* Dark library overlay — mimics Hebrew bg texture */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse 60% 80% at 25% 50%, rgba(14,30,53,0.4) 0%, transparent 70%)',
+        background: `
+          radial-gradient(ellipse 55% 90% at 20% 60%, rgba(8,15,30,0.5) 0%, transparent 65%),
+          radial-gradient(ellipse 70% 60% at 80% 40%, rgba(14,26,50,0.6) 0%, transparent 70%)
+        `,
         pointerEvents: 'none',
       }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1, height: HERO_H }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1.1fr',
-          gap: '40px',
-          alignItems: 'center',
-          minHeight: 'calc(100vh - 72px)',
-          paddingBottom: '40px',
+          gridTemplateColumns: '0.85fr 1.15fr',
+          height: '100%',
         }}>
-          {/* Photo — transparent PNG floats on dark bg */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', height: '100%', minHeight: '420px' }}>
+
+          {/* ── Photo column ─────────────────────── */}
+          <div style={{
+            display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+            height: '100%',
+          }}>
             <img
               src="/photo-dorit.png"
               alt="Дорит Гитерман — адвокат"
               style={{
-                maxWidth: '100%',
-                maxHeight: '75vh',
+                height: HERO_H,
+                maxHeight: '720px',
+                width: '100%',
                 objectFit: 'contain',
                 objectPosition: 'bottom center',
+                filter: 'drop-shadow(-8px 0 24px rgba(0,0,0,0.55))',
                 display: 'block',
-                filter: 'drop-shadow(0 8px 32px rgba(0,0,0,0.4))',
               }}
             />
           </div>
 
-          {/* Content */}
-          <div style={{ paddingTop: '20px' }}>
-            {/* Top decorative line */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '18px' }}>
-              <div style={{ width: '40px', height: '2px', background: 'rgba(110,168,222,0.4)' }} />
+          {/* ── Content column ───────────────────── */}
+          <div style={{
+            display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            padding: '40px 0 40px 8px',
+          }}>
+
+            {/* Top micro-decoration */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+              <div style={{ width: '36px', height: '2px', background: 'rgba(110,168,222,0.45)', borderRadius: '2px' }} />
               <div style={{ width: '6px', height: '6px', background: '#6ea8de', borderRadius: '50%' }} />
             </div>
 
-            <h1 style={{ fontSize: 'clamp(2.4rem, 5vw, 3.6rem)', fontWeight: 900, color: '#fff', lineHeight: 1.1, marginBottom: '12px' }}>
+            {/* Name */}
+            <h1 style={{
+              fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
+              fontWeight: 900, color: '#fff',
+              lineHeight: 1.05, marginBottom: '10px',
+              letterSpacing: '-0.5px',
+            }}>
               Дорит Гитерман
             </h1>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.6rem)', fontWeight: 700, color: '#6ea8de', lineHeight: 1.15, marginBottom: '18px' }}>
+
+            {/* Specialty */}
+            <h2 style={{
+              fontSize: 'clamp(1.4rem, 2.8vw, 2.4rem)',
+              fontWeight: 700, color: '#6ea8de',
+              lineHeight: 1.2, marginBottom: '18px',
+            }}>
               Адвокат по уголовным делам
             </h2>
 
-            <div style={{ width: '100%', height: '2px', background: 'linear-gradient(to right, #6ea8de, transparent)', marginBottom: '20px' }} />
+            {/* Accent line */}
+            <div style={{
+              height: '2px',
+              background: 'linear-gradient(to right, #6ea8de 0%, rgba(110,168,222,0.3) 60%, transparent 100%)',
+              marginBottom: '20px',
+            }} />
 
-            <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)', lineHeight: 1.7, marginBottom: '32px', maxWidth: '500px' }}>
+            {/* Description */}
+            <p style={{
+              color: 'rgba(255,255,255,0.82)',
+              fontSize: 'clamp(0.9rem, 1.4vw, 1.02rem)',
+              lineHeight: 1.75, marginBottom: '30px',
+              maxWidth: '490px',
+            }}>
               Уголовное право требует глубокого опыта и понимания системы.
-              <br/>25 лет практики и прецедентных дел — в моменты, когда нет места ошибкам.
+              <br />25 лет практики и прецедентных дел — в моменты, когда нет места ошибкам.
             </p>
 
             {/* Feature cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '36px' }}>
+            <div style={{
+              display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '10px', marginBottom: '30px',
+            }}>
               {FEATURES.map((f, i) => (
                 <div key={i} style={{
-                  background: 'rgba(15,32,64,0.7)',
-                  border: '1px solid rgba(110,168,222,0.25)',
+                  background: 'rgba(10,20,42,0.75)',
+                  border: '1px solid rgba(110,168,222,0.22)',
                   borderRadius: '14px',
-                  padding: '18px 14px',
+                  padding: '16px 12px 14px',
                   textAlign: 'center',
-                  backdropFilter: 'blur(8px)',
+                  backdropFilter: 'blur(6px)',
                 }}>
-                  <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>{f.icon}</div>
-                  <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#fff', lineHeight: 1.3 }}>{f.text}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#6ea8de', marginTop: '4px', lineHeight: 1.3 }}>{f.sub}</div>
+                  <div style={{ marginBottom: '8px', display: 'flex', justifyContent: 'center' }}>{f.icon}</div>
+                  <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#fff', lineHeight: 1.3 }}>{f.line1}</div>
+                  <div style={{ fontSize: '0.72rem', color: '#6ea8de', marginTop: '3px', lineHeight: 1.3 }}>{f.line2}</div>
                 </div>
               ))}
             </div>
 
-            {/* Inline contact form */}
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '28px' }}>
+            {/* Inline lead form */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '24px' }}>
               {sent ? (
-                <div style={{ color: '#6ea8de', fontWeight: 600, fontSize: '1.05rem' }}>
+                <div style={{ color: '#6ea8de', fontWeight: 600, fontSize: '1rem' }}>
                   ✓ Спасибо! Мы свяжемся с вами в ближайшее время.
                 </div>
               ) : (
                 <>
-                  <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '14px', fontSize: '0.95rem' }}>
+                  <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '13px', fontSize: '0.92rem' }}>
                     Хотите бесплатную консультацию?{' '}
                     <span style={{ color: '#6ea8de', fontWeight: 500 }}>Оставьте данные, мы перезвоним</span>
                   </p>
-                  <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  <form onSubmit={(e) => { e.preventDefault(); setSent(true) }}
+                    style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                     <input
-                      className="form-input"
-                      type="text"
-                      placeholder="Полное имя *"
-                      value={form.name}
-                      onChange={e => setForm({ ...form, name: e.target.value })}
-                      required
-                      style={{ flex: '1 1 160px' }}
+                      className="form-input" type="text" placeholder="Полное имя *"
+                      value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+                      required style={{ flex: '1 1 150px' }}
                     />
                     <input
-                      className="form-input"
-                      type="tel"
-                      placeholder="Телефон *"
-                      value={form.phone}
-                      onChange={e => setForm({ ...form, phone: e.target.value })}
-                      required
-                      style={{ flex: '1 1 140px' }}
+                      className="form-input" type="tel" placeholder="Телефон *"
+                      value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
+                      required style={{ flex: '1 1 130px' }}
                     />
-                    <button type="submit" className="btn-primary" style={{ whiteSpace: 'nowrap' }}>
+                    <button type="submit" className="btn-primary" style={{ whiteSpace: 'nowrap', padding: '14px 26px' }}>
                       Отправить
                     </button>
                   </form>
@@ -168,8 +194,10 @@ export default function Hero() {
       </div>
 
       <style>{`
-        @media (max-width: 820px) {
-          .hero-grid { grid-template-columns: 1fr !important; }
+        @media (max-width: 860px) {
+          #hero-grid { grid-template-columns: 1fr !important; height: auto !important; }
+          #hero-photo { display: none !important; }
+          #hero-content { padding: 40px 0 50px !important; }
         }
       `}</style>
     </section>
