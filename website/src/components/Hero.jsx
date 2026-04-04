@@ -41,7 +41,7 @@ export default function Hero() {
   const [sent, setSent] = useState(false)
 
   return (
-    <section style={{
+    <section id="hero" style={{
       position: 'relative',
       minHeight: '100vh',
       paddingTop: '72px',
@@ -58,7 +58,7 @@ export default function Hero() {
     }}>
 
       {/* Content grid — background is continuous behind both columns */}
-      <div style={{
+      <div id="hero-grid" style={{
         position: 'relative', zIndex: 1,
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         height: 'calc(100vh - 72px)',
@@ -105,7 +105,7 @@ export default function Hero() {
           </p>
 
           {/* Feature cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
+          <div className="hero-cards" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
             {FEATURES.map((f, i) => (
               <div key={i} style={{
                 background: 'rgba(110,168,222,0.13)',
@@ -131,7 +131,7 @@ export default function Hero() {
                 Хотите бесплатную консультацию?{' '}
                 <span style={{ color: '#6ea8de', fontWeight: 500 }}>Оставьте данные, мы перезвоним</span>
               </p>
-              <form onSubmit={e => { e.preventDefault(); setSent(true) }}
+              <form className="hero-form" onSubmit={e => { e.preventDefault(); setSent(true) }}
                 style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <input className="form-input" type="text" placeholder="Полное имя *"
                   value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
@@ -149,15 +149,42 @@ export default function Hero() {
       </div>
 
       <style>{`
-        @media (max-width: 860px) {
-          #hero-person-col { display: none !important; }
-          #hero-content-grid {
+        @media (max-width: 768px) {
+          #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(5, 15, 35, 0.58);
+            z-index: 0;
+            pointer-events: none;
+          }
+          #hero-grid {
             grid-template-columns: 1fr !important;
             height: auto !important;
-            padding-top: 32px; padding-bottom: 48px;
+            padding-top: 32px !important;
+            padding-bottom: 52px !important;
           }
-          #hero-content-grid > div:last-child {
-            padding-left: 0 !important; max-width: 100% !important;
+          #hero-grid > div:first-child {
+            display: none !important;
+          }
+          #hero-grid > div:last-child {
+            padding-left: 0 !important;
+            max-width: 100% !important;
+          }
+          .hero-cards {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+          }
+          .hero-form {
+            flex-direction: column !important;
+          }
+          .hero-form input {
+            flex: unset !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          .hero-form button {
+            width: 100% !important;
           }
         }
       `}</style>

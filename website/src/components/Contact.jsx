@@ -82,10 +82,18 @@ export default function Contact() {
       </div>
 
       <style>{`
-        @media (max-width: 820px) {
+        @media (max-width: 768px) {
           #contact > div { grid-template-columns: 1fr !important; min-height: auto !important; }
           #contact > div > div:first-child { display: none; }
           #contact > div > div:last-child { padding: 60px 0 !important; }
+          #contact::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(5, 14, 34, 0.60);
+            z-index: 0;
+            pointer-events: none;
+          }
         }
       `}</style>
     </section>
