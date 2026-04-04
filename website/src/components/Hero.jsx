@@ -53,22 +53,16 @@ export default function Hero() {
         transform: 'scale(1.08)',
       }} />
 
-      {/* Layer 2a — top white/light haze (matches Hebrew's airy top) */}
+      {/* Overlay: soft white from top */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to bottom, rgba(180,205,255,0.28) 0%, rgba(140,175,240,0.1) 30%, transparent 55%)',
+        background: 'linear-gradient(to bottom, rgba(255,255,255,0.35), transparent 40%)',
       }} />
 
-      {/* Layer 2b — right dark blue gradient (makes text column readable) */}
+      {/* Overlay: dark blue from right */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to left, rgba(6,14,40,0.92) 0%, rgba(6,14,40,0.72) 35%, rgba(6,14,40,0.25) 65%, transparent 100%)',
-      }} />
-
-      {/* Layer 2c — overall cool blue tint to counter warm SVG tones */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'rgba(8,18,55,0.38)',
+        background: 'linear-gradient(to right, transparent 40%, rgba(5,15,35,0.95))',
       }} />
 
       {/* Layer 3 — person cutout, inside left 40%, anchored bottom */}
