@@ -10,7 +10,7 @@ export default function Contact() {
       style={{
         position: 'relative',
         overflow: 'hidden',
-        minHeight: '580px',
+        minHeight: '660px',
         backgroundImage: `
           linear-gradient(to right,
             rgba(5,15,35,0.20) 0%,
@@ -20,9 +20,9 @@ export default function Contact() {
           ),
           url('/photo-dorit-contact.png')
         `,
-        backgroundSize: 'auto, cover',
-        backgroundPosition: 'center, left center',
-        backgroundRepeat: 'no-repeat, no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: '20% center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       {/* Content grid — left spacer keeps woman visible, right has form */}
@@ -31,7 +31,7 @@ export default function Contact() {
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         display: 'grid',
         gridTemplateColumns: '44% 56%',
-        minHeight: '580px',
+        minHeight: '660px',
       }}>
 
         {/* Left — transparent spacer so woman in background photo shows through */}

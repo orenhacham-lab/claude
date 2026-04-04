@@ -41,53 +41,24 @@ export default function Hero() {
   const [sent, setSent] = useState(false)
 
   return (
-    <section style={{ position: 'relative', minHeight: '100vh', paddingTop: '72px', overflow: 'hidden' }}>
+    <section style={{
+      position: 'relative',
+      minHeight: '100vh',
+      paddingTop: '72px',
+      overflow: 'hidden',
+      backgroundImage: `
+        linear-gradient(to bottom, rgba(255,255,255,0.32), rgba(255,255,255,0) 35%),
+        linear-gradient(to right, rgba(5,15,35,0.05) 0%, rgba(5,15,35,0.18) 28%, rgba(5,15,35,0.58) 52%, rgba(5,15,35,0.90) 74%, rgba(5,15,35,0.97) 100%),
+        url('/photo-dorit-contact.png')
+      `,
+      backgroundSize: 'cover',
+      backgroundPosition: 'left center',
+      backgroundRepeat: 'no-repeat',
+    }}>
 
-      {/* Layer 1 — real bookshelf background, blurred */}
+      {/* Content grid — background is continuous behind both columns */}
       <div style={{
-        position: 'absolute', inset: 0, zIndex: 0,
-        backgroundImage: 'url(/bg-library.svg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top',
-        filter: 'blur(6px)',
-        transform: 'scale(1.08)',
-      }} />
-
-      {/* Overlays — exact spec */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: `
-          linear-gradient(to bottom, rgba(255,255,255,0.42), rgba(255,255,255,0.00) 38%),
-          linear-gradient(to left, rgba(5,15,35,0.92), rgba(5,15,35,0.62) 42%, rgba(5,15,35,0.10) 72%, transparent 100%)
-        `,
-      }} />
-
-      {/* Person — 42% wide column, height 96%, bottom 0, left -10px */}
-      <div style={{
-        position: 'absolute', zIndex: 2,
-        left: 0, bottom: 0,
-        width: '42%', height: '100%',
-        overflow: 'hidden',
-        pointerEvents: 'none',
-      }}>
-        <img
-          src="/photo-dorit.png"
-          alt=""
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: '-10px',
-            height: '96%',
-            width: 'auto',
-            maxWidth: 'none',
-          }}
-        />
-      </div>
-
-      {/* Content grid */}
-      <div style={{
-        position: 'relative', zIndex: 3,
+        position: 'relative', zIndex: 1,
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         height: 'calc(100vh - 72px)',
         display: 'grid',
