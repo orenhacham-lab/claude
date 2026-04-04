@@ -53,25 +53,20 @@ export default function Hero() {
         transform: 'scale(1.08)',
       }} />
 
-      {/* Overlay: soft white from top */}
+      {/* Overlays — exact spec */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to bottom, rgba(255,255,255,0.35), transparent 40%)',
+        background: `
+          linear-gradient(to bottom, rgba(255,255,255,0.42), rgba(255,255,255,0.00) 38%),
+          linear-gradient(to left, rgba(5,15,35,0.92), rgba(5,15,35,0.62) 42%, rgba(5,15,35,0.10) 72%, transparent 100%)
+        `,
       }} />
 
-      {/* Overlay: dark blue from right */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to right, transparent 40%, rgba(5,15,35,0.95))',
-      }} />
-
-      {/* Layer 3 — person cutout, inside left 40%, anchored bottom */}
+      {/* Person — 42% wide column, height 96%, bottom 0, left -10px */}
       <div style={{
         position: 'absolute', zIndex: 2,
-        left: 0,
-        bottom: 0,
-        width: '40%',
-        height: '100%',
+        left: 0, bottom: 0,
+        width: '42%', height: '100%',
         overflow: 'hidden',
         pointerEvents: 'none',
       }}>
@@ -82,31 +77,30 @@ export default function Hero() {
           style={{
             position: 'absolute',
             bottom: 0,
-            left: '-40px',
-            height: '112%',
+            left: '-10px',
+            height: '96%',
             width: 'auto',
             maxWidth: 'none',
           }}
         />
       </div>
 
-      {/* Layer 4 — content grid */}
+      {/* Content grid */}
       <div style={{
         position: 'relative', zIndex: 3,
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         height: 'calc(100vh - 72px)',
         display: 'grid',
-        gridTemplateColumns: '40% 60%',
+        gridTemplateColumns: '42% 58%',
       }}>
 
-        {/* Left cell — spacer only, person is in absolute layer above */}
         <div />
 
         {/* Right cell — text content */}
         <div style={{
           display: 'flex', flexDirection: 'column', justifyContent: 'center',
           paddingLeft: '40px',
-          maxWidth: '520px',
+          maxWidth: '560px',
         }}>
           <h1 style={{
             fontSize: 'clamp(2rem, 4vw, 3.6rem)', fontWeight: 900,
