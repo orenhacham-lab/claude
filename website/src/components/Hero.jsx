@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { submitLead } from '../lib/supabase'
 
 function ClockIcon() {
   return (
@@ -39,6 +40,18 @@ const FEATURES = [
 export default function Hero() {
   const [form, setForm] = useState({ name: '', phone: '' })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setSubmitting(true)
+    setSubmitError(null)
+    const { error } = await submitLead({ full_name: form.name, phone: form.phone, form_source: 'hero' })
+    setSubmitting(false)
+    if (error) { setSubmitError('Ошибка отправки. Попробуйте позже.'); return }
+    setSent(true)
+  }
 
   return (
     <section id="hero" className="hero-section" style={{
@@ -123,7 +136,7 @@ export default function Hero() {
                 Хотите бесплатную консультацию?{' '}
                 <span style={{ color: '#6ea8de', fontWeight: 500 }}>Оставьте данные, мы перезвоним</span>
               </p>
-              <form className="hero-form" onSubmit={e => { e.preventDefault(); setSent(true) }}
+              <form className="hero-form" onSubmit={handleSubmit}
                 style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <input className="form-input" type="text" placeholder="Полное имя *"
                   value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
@@ -131,10 +144,13 @@ export default function Hero() {
                 <input className="form-input" type="tel" placeholder="Телефон *"
                   value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
                   required style={{ flex: '1 1 120px' }} />
-                <button type="submit" className="btn-primary" style={{ whiteSpace: 'nowrap' }}>
-                  Отправить
+                <button type="submit" className="btn-primary" style={{ whiteSpace: 'nowrap' }} disabled={submitting}>
+                  {submitting ? '...' : 'Отправить'}
                 </button>
               </form>
+              {submitError && (
+                <p style={{ color: '#ff6b6b', fontSize: '0.85rem', marginTop: '8px' }}>{submitError}</p>
+              )}
             </>
           )}
         </div>

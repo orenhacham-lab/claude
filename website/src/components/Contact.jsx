@@ -1,8 +1,21 @@
 import { useState } from 'react'
+import { submitLead } from '../lib/supabase'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', phone: '' })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setSubmitting(true)
+    setSubmitError(null)
+    const { error } = await submitLead({ full_name: form.name, phone: form.phone, form_source: 'contact' })
+    setSubmitting(false)
+    if (error) { setSubmitError('Ошибка отправки. Попробуйте позже.'); return }
+    setSent(true)
+  }
 
   return (
     <section id="contact" style={{
@@ -68,14 +81,19 @@ export default function Contact() {
             </div>
           ) : (
             <form
-              onSubmit={e => { e.preventDefault(); setSent(true) }}
+              onSubmit={handleSubmit}
               style={{ display: 'flex', flexDirection: 'column', gap: '14px', maxWidth: '460px' }}
             >
               <input className="form-input-dark" type="text" placeholder="Полное имя *"
                 value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
               <input className="form-input-dark" type="tel" placeholder="Телефон *"
                 value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} required />
-              <button type="submit" className="btn-submit">Отправить</button>
+              <button type="submit" className="btn-submit" disabled={submitting}>
+                {submitting ? '...' : 'Отправить'}
+              </button>
+              {submitError && (
+                <p style={{ color: '#ff6b6b', fontSize: '0.85rem', marginTop: '4px' }}>{submitError}</p>
+              )}
             </form>
           )}
         </div>

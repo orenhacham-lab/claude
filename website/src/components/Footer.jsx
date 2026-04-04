@@ -65,12 +65,12 @@ export default function Footer() {
           <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}>
             © 2026 Дорит Гитерман — Адвокат
           </div>
-          <div style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.72rem' }}>
-            האתר נבנה ע״י{' '}
+          <div style={{ color: '#fff', fontSize: '0.72rem' }}>
+            Web Design by{' '}
             <a href="https://www.gotop.co.il" target="_blank" rel="noopener noreferrer"
-              style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'underline', transition: 'color .2s' }}
+              style={{ color: '#fff', textDecoration: 'underline', transition: 'color .2s' }}
               onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
-              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+              onMouseLeave={e => e.currentTarget.style.color = '#fff'}
             >
               Go Top
             </a>
