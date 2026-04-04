@@ -1,8 +1,7 @@
 function PinIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6ea8de" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-      <circle cx="12" cy="10" r="3"/>
+      <path d="M14 2l8 8-2 2-1.5-1.5-7 7 .5 3.5-2 2-4-4-4.5 4.5-1.5-1.5 4.5-4.5-4-4 2-2 3.5.5 7-7L14 2z"/>
     </svg>
   )
 }
