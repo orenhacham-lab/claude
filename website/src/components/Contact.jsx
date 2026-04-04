@@ -5,57 +5,28 @@ export default function Contact() {
   const [sent, setSent] = useState(false)
 
   return (
-    <section id="contact" style={{ position: 'relative', overflow: 'hidden', minHeight: '660px' }}>
-
-      {/* Office/library background — blurred */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 0,
-        backgroundImage: 'url(/bg-library.svg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        filter: 'blur(5px)',
-        transform: 'scale(1.06)',
-      }} />
-
-      {/* Dark blue overlay — continuous across full width */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to right, rgba(5,14,34,0.38) 0%, rgba(5,14,34,0.65) 40%, rgba(5,14,34,0.93) 100%)',
-      }} />
-
-      {/* photo-dorit.png — foreground person, left side, no box */}
-      <div style={{
-        position: 'absolute', zIndex: 2,
-        left: 0, bottom: 0,
-        width: '46%', height: '100%',
-        overflow: 'hidden',
-        pointerEvents: 'none',
-      }}>
-        <img
-          src="/photo-dorit.png"
-          alt=""
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: '-10px',
-            height: '100%',
-            width: 'auto',
-            maxWidth: 'none',
-          }}
-        />
-      </div>
+    <section id="contact" style={{
+      position: 'relative', overflow: 'hidden', minHeight: '660px',
+      backgroundImage: `
+        linear-gradient(to right, rgba(5,14,34,0.25) 0%, rgba(5,14,34,0.68) 48%, rgba(5,14,34,0.95) 100%),
+        url('/photo-dorit.png'),
+        url('/bg-library.svg')
+      `,
+      backgroundSize: 'cover, auto 100%, cover',
+      backgroundPosition: 'center, left bottom, center',
+      backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
+      backgroundColor: '#050e22',
+    }}>
 
       {/* Content grid */}
       <div style={{
-        position: 'relative', zIndex: 3,
+        position: 'relative', zIndex: 1,
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         display: 'grid',
         gridTemplateColumns: '44% 56%',
         minHeight: '660px',
       }}>
 
-        {/* Left — transparent spacer, person is absolute */}
         <div />
 
         {/* Right — form content */}
@@ -112,10 +83,9 @@ export default function Contact() {
 
       <style>{`
         @media (max-width: 820px) {
-          #contact > div[style*="grid"] { grid-template-columns: 1fr !important; min-height: auto !important; }
-          #contact > div[style*="grid"] > div:first-child { display: none; }
-          #contact > div[style*="zIndex: 2"] { display: none; }
-          #contact > div[style*="grid"] > div:last-child { padding: 60px 0 !important; }
+          #contact > div { grid-template-columns: 1fr !important; min-height: auto !important; }
+          #contact > div > div:first-child { display: none; }
+          #contact > div > div:last-child { padding: 60px 0 !important; }
         }
       `}</style>
     </section>

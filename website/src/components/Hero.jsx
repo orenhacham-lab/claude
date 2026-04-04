@@ -52,8 +52,9 @@ export default function Hero() {
         url('/photo-dorit-contact.png')
       `,
       backgroundSize: 'cover',
-      backgroundPosition: '48% 35%',
+      backgroundPosition: 'left 48% top 72px',
       backgroundRepeat: 'no-repeat',
+      backgroundColor: '#0b1729',
     }}>
 
       {/* Content grid — background is continuous behind both columns */}
