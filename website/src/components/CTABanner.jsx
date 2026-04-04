@@ -35,21 +35,18 @@ export default function CTABanner() {
           {/* Right: Photo — transparent PNG on dark bg */}
           <div style={{
             background: 'linear-gradient(135deg, #1a2f50, #0c1829)',
-            display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
             overflow: 'hidden', position: 'relative',
+            padding: 0, margin: 0,
           }}>
             <img
               src="/photo-dorit-cta.png"
               alt="Дорит Гитерман"
               style={{
-                maxWidth: '100%',
-                maxHeight: '100%',
-                width: 'auto',
-                height: '100%',
-                objectFit: 'contain',
-                objectPosition: 'bottom center',
                 display: 'block',
-                filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.5))',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center top',
               }}
             />
           </div>
