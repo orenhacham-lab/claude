@@ -34,7 +34,7 @@ export async function submitLead({ full_name, phone, form_source }) {
       page_url: typeof window !== 'undefined' ? window.location.href : '',
     }]).select()
     if (error) {
-      console.error('[Supabase] insert error:', error)
+      console.error('[Supabase] insert error — message:', error.message, '| code:', error.code, '| details:', error.details, '| hint:', error.hint)
       return { error: `Ошибка: ${error.message}` }
     }
     console.log('[Supabase] insert success, row:', data)
