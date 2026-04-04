@@ -68,7 +68,7 @@ ul { list-style: none; }
   font-weight: 700; white-space: nowrap;
 }
 .title-deco { display: flex; align-items: center; gap: 6px; }
-.title-deco-line { width: 55px; height: 2px; border-radius: 2px; }
+.title-deco-line { width: 75px; height: 2px; border-radius: 2px; }
 .title-deco-arrow { font-size: 1rem; }
 
 .section-title.on-dark h2 { color: var(--accent); }

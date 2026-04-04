@@ -8,23 +8,23 @@ const VIDEOS = [
   {
     type: 'youtube',
     id: 'e3D4BwGsAi8',
-    title: 'Уголовное право: опыт, тактика и защита',
+    title: 'Уголовное право: стратегия защиты и опыт адвоката',
   },
   {
     type: 'tiktok',
     url: 'https://vt.tiktok.com/ZSPJsKAmh/',
-    title: 'Видео в TikTok — адвокат Дорит Гитерман',
+    title: 'Права при задержании: что нужно знать',
   },
   {
     type: 'youtube',
     id: 'kbL5SORQa-U',
-    title: 'Насилие в семье: как защитить свои права',
+    title: 'Насилие в семье: юридическая защита и ваши права',
   },
   {
     type: 'tiktok',
     url: 'https://www.tiktok.com/@dorit_gitterman/video/7481169459005246727',
     id: '7481169459005246727',
-    title: 'Советы адвоката | Что делать при аресте',
+    title: 'Что делать при аресте: советы уголовного адвоката',
   },
 ]
 
@@ -154,14 +154,20 @@ function VideoCard({ video, onYouTubeClick }) {
           onError={(e) => { e.target.style.opacity = '0' }}
         />
       ) : (
-        /* TikTok placeholder — branded dark card */
+        /* TikTok placeholder — dark cinematic card */
         <div style={{
           width: '100%', height: '100%',
-          background: 'linear-gradient(135deg, #010101 0%, #1a1a2e 100%)',
+          background: 'linear-gradient(135deg, #0a0c12 0%, #111827 40%, #1a0e1f 100%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
+          position: 'relative', overflow: 'hidden',
         }}>
-          <div style={{ opacity: 0.35 }}>
-            <TikTokIcon size={52} />
+          {/* Subtle noise texture via radial accents */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'radial-gradient(ellipse 80% 60% at 30% 40%, rgba(105,201,208,0.06) 0%, transparent 70%), radial-gradient(ellipse 60% 80% at 70% 70%, rgba(238,29,82,0.06) 0%, transparent 70%)',
+          }} />
+          <div style={{ position: 'relative', opacity: 0.22 }}>
+            <TikTokIcon size={64} />
           </div>
         </div>
       )}
@@ -177,18 +183,19 @@ function VideoCard({ video, onYouTubeClick }) {
         padding: '18px 16px',
         transition: 'background 0.2s',
       }}>
-        {/* Top: play or TikTok badge */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+        {/* Top: play + optional platform badge */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
           <PlayBtn hovered={hovered} />
           {!isYT && (
-            <span style={{
-              background: 'rgba(0,0,0,0.55)', color: '#fff',
-              fontSize: '0.68rem', padding: '2px 8px', borderRadius: '20px',
-              border: '1px solid rgba(255,255,255,0.2)',
-              backdropFilter: 'blur(4px)',
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px',
+              background: 'rgba(0,0,0,0.6)', padding: '3px 10px', borderRadius: '20px',
+              border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(6px)',
             }}>
-              TikTok · открыть →
-            </span>
+              <TikTokIcon size={12} />
+              <span style={{ color: '#fff', fontSize: '0.66rem', fontWeight: 500, letterSpacing: '0.3px' }}>
+                TikTok · открыть
+              </span>
+            </div>
           )}
         </div>
 

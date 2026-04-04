@@ -79,7 +79,7 @@ export default function Reviews() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
           {REVIEWS_PAGES[page].map((r, i) => (
             <div key={i} style={{
-              background: 'rgba(15,32,64,0.6)',
+              background: 'rgba(10,20,45,0.85)',
               border: '1px solid rgba(110,168,222,0.2)',
               borderRadius: '16px',
               padding: '28px 24px',
