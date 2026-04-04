@@ -1,5 +1,13 @@
 import { useState } from 'react'
 
+function ClockIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+    </svg>
+  )
+}
+
 function GlobeIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -22,18 +30,9 @@ function ScalesIcon() {
   )
 }
 
-function ClockIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <polyline points="12 6 12 12 16 14"/>
-    </svg>
-  )
-}
-
 const FEATURES = [
   { icon: <ClockIcon />, line1: 'Доступность 24/7', line2: 'в экстренных ситуациях' },
-  { icon: <GlobeIcon />,  line1: 'Консультации на', line2: 'иврите, рус., англ.' },
+  { icon: <GlobeIcon />, line1: 'Консультации на', line2: 'иврите, рус., англ.' },
   { icon: <ScalesIcon />, line1: '25 лет опыта', line2: 'в уголовном праве' },
 ]
 
@@ -43,10 +42,9 @@ export default function Hero() {
 
   return (
     <section style={{
-      minHeight: '100vh',
       background: '#0b1729',
       paddingTop: '72px',
-      position: 'relative',
+      minHeight: '100vh',
       overflow: 'hidden',
     }}>
       <div style={{
@@ -56,16 +54,10 @@ export default function Hero() {
         height: 'calc(100vh - 72px)',
         display: 'grid',
         gridTemplateColumns: '2fr 3fr',
-        position: 'relative',
-        zIndex: 1,
       }}>
 
-        {/* ── Photo column ─────────────────────── */}
-        <div style={{
-          position: 'relative',
-          overflow: 'hidden',
-          height: '100%',
-        }}>
+        {/* Left: image column */}
+        <div style={{ position: 'relative', overflow: 'hidden', height: '100%' }}>
           <img
             src="/photo-dorit.png"
             alt="Дорит Гитерман — адвокат"
@@ -78,82 +70,75 @@ export default function Hero() {
               width: 'auto',
               maxWidth: 'none',
               display: 'block',
-              filter: 'drop-shadow(-6px 0 20px rgba(0,0,0,0.5))',
             }}
           />
         </div>
 
-        {/* ── Content column ───────────────────── */}
+        {/* Right: content column */}
         <div style={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          padding: '40px 0 40px 24px',
+          paddingLeft: '32px',
+          maxWidth: '520px',
         }}>
 
-          {/* Name */}
           <h1 style={{
-            fontSize: 'clamp(2.2rem, 4.2vw, 3.6rem)',
+            fontSize: 'clamp(2rem, 4vw, 3.6rem)',
             fontWeight: 900,
             color: '#fff',
             lineHeight: 1.05,
-            marginBottom: '8px',
-            letterSpacing: '-0.5px',
+            marginBottom: '12px',
           }}>
             Дорит Гитерман
           </h1>
 
-          {/* Specialty */}
           <h2 style={{
-            fontSize: 'clamp(1.3rem, 2.6vw, 2.2rem)',
+            fontSize: 'clamp(1.2rem, 2.4vw, 2rem)',
             fontWeight: 700,
             color: '#6ea8de',
-            lineHeight: 1.2,
-            marginBottom: '20px',
+            lineHeight: 1.25,
+            marginBottom: '16px',
           }}>
             Адвокат по уголовным делам<br />
             и делам о насилии в семье
           </h2>
 
-          {/* Accent line — same blue gradient as Hebrew */}
           <div style={{
             height: '2px',
-            background: 'linear-gradient(to right, #6ea8de 0%, rgba(110,168,222,0.2) 70%, transparent 100%)',
-            marginBottom: '22px',
+            background: 'linear-gradient(to right, #6ea8de, rgba(110,168,222,0.15) 70%, transparent)',
+            marginBottom: '16px',
           }} />
 
-          {/* Description */}
           <p style={{
-            color: 'rgba(255,255,255,0.82)',
-            fontSize: 'clamp(0.9rem, 1.3vw, 1rem)',
-            lineHeight: 1.8,
-            marginBottom: '28px',
-            maxWidth: '500px',
+            color: 'rgba(255,255,255,0.8)',
+            fontSize: 'clamp(0.88rem, 1.2vw, 0.98rem)',
+            lineHeight: 1.75,
+            marginBottom: '24px',
           }}>
-            Уголовное право требует глубокого опыта и понимания системы.
-            <br />25 лет практики и прецедентных дел — в моменты, когда нет места ошибкам.
+            Уголовное право требует глубокого опыта и понимания системы.<br />
+            25 лет практики и прецедентных дел — в моменты, когда нет места ошибкам.
           </p>
 
-          {/* Feature cards — 3 equal columns */}
+          {/* Feature cards */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '12px',
-            marginBottom: '28px',
+            gap: '16px',
+            marginBottom: '24px',
           }}>
             {FEATURES.map((f, i) => (
               <div key={i} style={{
                 background: 'rgba(110,168,222,0.12)',
                 border: '1px solid rgba(110,168,222,0.3)',
                 borderRadius: '12px',
-                padding: '18px 12px 14px',
+                padding: '20px',
                 textAlign: 'center',
-                backdropFilter: 'blur(8px)',
               }}>
                 <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>
                   {f.icon}
                 </div>
-                <div style={{ fontWeight: 700, fontSize: '0.86rem', color: '#fff', lineHeight: 1.3 }}>
+                <div style={{ fontWeight: 700, fontSize: '0.84rem', color: '#fff', lineHeight: 1.35 }}>
                   {f.line1}
                 </div>
                 <div style={{ fontSize: '0.74rem', color: '#6ea8de', marginTop: '4px', lineHeight: 1.3 }}>
@@ -163,32 +148,32 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* Lead form */}
+          {/* Form */}
           {sent ? (
-            <div style={{ color: '#6ea8de', fontWeight: 600, fontSize: '1rem' }}>
+            <div style={{ color: '#6ea8de', fontWeight: 600 }}>
               ✓ Спасибо! Мы свяжемся с вами в ближайшее время.
             </div>
           ) : (
             <>
-              <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '12px', fontSize: '0.9rem' }}>
+              <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '12px', fontSize: '0.88rem' }}>
                 Хотите бесплатную консультацию?{' '}
                 <span style={{ color: '#6ea8de', fontWeight: 500 }}>Оставьте данные, мы перезвоним</span>
               </p>
               <form
-                onSubmit={(e) => { e.preventDefault(); setSent(true) }}
-                style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}
+                onSubmit={e => { e.preventDefault(); setSent(true) }}
+                style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}
               >
                 <input
                   className="form-input" type="text" placeholder="Полное имя *"
                   value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                  required style={{ flex: '1 1 150px' }}
+                  required style={{ flex: '1 1 140px' }}
                 />
                 <input
                   className="form-input" type="tel" placeholder="Телефон *"
                   value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
-                  required style={{ flex: '1 1 130px' }}
+                  required style={{ flex: '1 1 120px' }}
                 />
-                <button type="submit" className="btn-primary" style={{ whiteSpace: 'nowrap', padding: '14px 24px' }}>
+                <button type="submit" className="btn-primary" style={{ whiteSpace: 'nowrap' }}>
                   Отправить
                 </button>
               </form>
@@ -199,7 +184,18 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 860px) {
-          #hero-grid { grid-template-columns: 1fr !important; height: auto !important; }
+          section > div[style*="grid"] {
+            grid-template-columns: 1fr !important;
+            height: auto !important;
+            padding-top: 40px;
+          }
+          section > div[style*="grid"] > div:first-child {
+            display: none;
+          }
+          section > div[style*="grid"] > div:last-child {
+            padding-left: 0 !important;
+            max-width: 100% !important;
+          }
         }
       `}</style>
     </section>
