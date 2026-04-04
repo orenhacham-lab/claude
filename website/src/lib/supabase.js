@@ -28,7 +28,6 @@ export async function submitLead({ full_name, phone, form_source }) {
       phone: phone.trim(),
       form_source,
       page_url: typeof window !== 'undefined' ? window.location.href : '',
-      created_at: new Date().toISOString(),
     }])
     return { error: error?.message ?? null }
   } catch (e) {
