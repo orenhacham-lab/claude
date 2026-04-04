@@ -41,19 +41,11 @@ export default function Hero() {
   const [sent, setSent] = useState(false)
 
   return (
-    <section id="hero" style={{
+    <section id="hero" className="hero-section" style={{
       position: 'relative',
       minHeight: '100vh',
       paddingTop: '72px',
       overflow: 'hidden',
-      backgroundImage: `
-        linear-gradient(to bottom, rgba(255,255,255,0.32), rgba(255,255,255,0) 35%),
-        linear-gradient(to right, rgba(5,15,35,0.05) 0%, rgba(5,15,35,0.18) 28%, rgba(5,15,35,0.58) 52%, rgba(5,15,35,0.90) 74%, rgba(5,15,35,0.97) 100%),
-        url('/photo-dorit-contact.png')
-      `,
-      backgroundSize: 'cover',
-      backgroundPosition: 'left 48% top 72px',
-      backgroundRepeat: 'no-repeat',
       backgroundColor: '#0b1729',
     }}>
 
@@ -149,14 +141,21 @@ export default function Hero() {
       </div>
 
       <style>{`
+        .hero-section {
+          background-image:
+            linear-gradient(to bottom, rgba(255,255,255,0.32), rgba(255,255,255,0) 35%),
+            linear-gradient(to right, rgba(5,15,35,0.05) 0%, rgba(5,15,35,0.18) 28%, rgba(5,15,35,0.58) 52%, rgba(5,15,35,0.90) 74%, rgba(5,15,35,0.97) 100%),
+            url('/photo-dorit-contact.png');
+          background-size: cover;
+          background-position: left 48% top 72px;
+          background-repeat: no-repeat;
+        }
         @media (max-width: 768px) {
-          #hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(5, 15, 35, 0.58);
-            z-index: 0;
-            pointer-events: none;
+          .hero-section {
+            background-position: 28% center;
+            background-image:
+              linear-gradient(rgba(5,15,35,0.68), rgba(5,15,35,0.68)),
+              url('/photo-dorit-contact.png');
           }
           #hero-grid {
             grid-template-columns: 1fr !important;
