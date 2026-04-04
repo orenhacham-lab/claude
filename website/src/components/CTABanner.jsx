@@ -1,6 +1,6 @@
 export default function CTABanner() {
   return (
-    <section style={{ background: 'var(--light-bg)', padding: '60px 0' }}>
+    <section id="cta-banner" style={{ background: 'var(--light-bg)', padding: '60px 0' }}>
       <div className="container">
         <div style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr',
@@ -25,7 +25,7 @@ export default function CTABanner() {
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
-              className="btn-outline"
+              className="btn-outline cta-btn"
               style={{ alignSelf: 'flex-start' }}
             >
               ← Бесплатная консультация
@@ -55,8 +55,10 @@ export default function CTABanner() {
 
       <style>{`
         @media (max-width: 720px) {
-          section > .container > div { grid-template-columns: 1fr !important; }
-          section > .container > div > div:last-child { min-height: 220px; }
+          #cta-banner .container > div { grid-template-columns: 1fr !important; }
+          #cta-banner .container > div > div:first-child { padding: 36px 28px !important; }
+          #cta-banner .container > div > div:last-child { min-height: 220px; }
+          #cta-banner .cta-btn { align-self: stretch !important; text-align: center; justify-content: center; }
         }
       `}</style>
     </section>

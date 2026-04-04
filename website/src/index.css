@@ -120,3 +120,14 @@ ul { list-style: none; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--dark3); }
 ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+@media (max-width: 768px) {
+  .section-title { margin-bottom: 28px !important; }
+  #services { padding: 48px 0 !important; }
+  #services .container > div { gap: 24px 16px !important; }
+  #about { padding: 48px 0 !important; }
+  #media { padding: 48px 0 !important; }
+  #faq { padding: 48px 0 !important; }
+  #reviews { padding: 48px 0 !important; }
+  #cta-banner { padding: 36px 0 !important; }
+}

@@ -15,12 +15,12 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <Reviews />
         <Services />
         <About />
         <CTABanner />
         <Media />
         <FAQ />
+        <Reviews />
         <Contact />
       </main>
       <Footer />
