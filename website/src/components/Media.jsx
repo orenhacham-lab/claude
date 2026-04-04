@@ -1,66 +1,57 @@
 import { useState, useEffect } from 'react'
 
 // ═══════════════════════════════════════════════════════════════
-// הוסף כאן את לינקי YouTube — מלא את ה-url בכל פריט
-// Add YouTube URLs here — paste full YouTube links as `url`
+// VIDEOS — עדכן כותרות לפי הצורך / Update titles as needed
+// YouTube → modal embed | TikTok → opens in new tab
 // ═══════════════════════════════════════════════════════════════
 const VIDEOS = [
   {
-    url: 'https://www.youtube.com/watch?v=PLACEHOLDER_1',
-    title: 'За кулисами уголовного мира — политика и уголовное право',
+    type: 'youtube',
+    id: 'e3D4BwGsAi8',
+    title: 'Уголовное право: опыт, тактика и защита',
   },
   {
-    url: 'https://www.youtube.com/watch?v=PLACEHOLDER_2',
-    title: 'Права подозреваемого на допросе — что важно знать',
+    type: 'tiktok',
+    url: 'https://vt.tiktok.com/ZSPJsKAmh/',
+    title: 'Видео в TikTok — адвокат Дорит Гитерман',
   },
   {
-    url: 'https://www.youtube.com/watch?v=PLACEHOLDER_3',
-    title: 'Охранный ордер — как получить и как защититься',
+    type: 'youtube',
+    id: 'kbL5SORQa-U',
+    title: 'Насилие в семье: как защитить свои права',
   },
   {
-    url: 'https://www.youtube.com/watch?v=PLACEHOLDER_4',
-    title: 'Домашнее насилие: правовые аспекты и защита',
-  },
-  {
-    url: 'https://www.youtube.com/watch?v=PLACEHOLDER_5',
-    title: 'Первое бизнес-радио — интервью с адвокатом Дорит Гитерман',
-  },
-  {
-    url: 'https://www.youtube.com/watch?v=PLACEHOLDER_6',
-    title: 'Руководство для потерпевшего — как предотвратить столкновения с полицией',
+    type: 'tiktok',
+    url: 'https://www.tiktok.com/@dorit_gitterman/video/7481169459005246727',
+    id: '7481169459005246727',
+    title: 'Советы адвоката | Что делать при аресте',
   },
 ]
 
-// Extract YouTube video ID from any YouTube URL format
-function getVideoId(url) {
-  if (!url) return null
-  const m = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/)
-  return m ? m[1] : null
+function getYtThumb(id) {
+  return `https://img.youtube.com/vi/${id}/hqdefault.jpg`
 }
 
-function getThumb(videoId) {
-  return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+// ── TikTok icon ──────────────────────────────────────────────
+function TikTokIcon({ size = 28 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="white">
+      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
+    </svg>
+  )
 }
 
-// Build pages of 3 videos each
-function buildPages(videos) {
-  const pages = []
-  for (let i = 0; i < videos.length; i += 3) {
-    pages.push(videos.slice(i, i + 3))
-  }
-  return pages
-}
-
-// ── Play button ───────────────────────────────────────────────
-function PlayBtn() {
+// ── Play button ──────────────────────────────────────────────
+function PlayBtn({ hovered }) {
   return (
     <div style={{
       width: '58px', height: '58px', borderRadius: '50%',
-      background: 'rgba(255,255,255,0.2)',
+      background: hovered ? 'rgba(110,168,222,0.55)' : 'rgba(255,255,255,0.22)',
       backdropFilter: 'blur(6px)',
-      border: '2px solid rgba(255,255,255,0.35)',
+      border: '2px solid rgba(255,255,255,0.4)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       transition: 'background 0.2s, transform 0.2s',
+      transform: hovered ? 'scale(1.12)' : 'scale(1)',
       flexShrink: 0,
     }}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
@@ -70,7 +61,7 @@ function PlayBtn() {
   )
 }
 
-// ── Video modal ───────────────────────────────────────────────
+// ── Video modal (YouTube only) ───────────────────────────────
 function VideoModal({ videoId, title, onClose }) {
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
@@ -92,48 +83,33 @@ function VideoModal({ videoId, title, onClose }) {
         padding: '20px',
       }}
     >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{ width: '100%', maxWidth: '960px', position: 'relative' }}
-      >
-        {/* Close button */}
+      <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: '960px', position: 'relative' }}>
         <button
           onClick={onClose}
+          aria-label="Закрыть"
           style={{
-            position: 'absolute', top: '-44px', right: '0',
+            position: 'absolute', top: '-48px', right: '0',
             background: 'none', border: 'none', cursor: 'pointer',
-            color: 'rgba(255,255,255,0.7)', fontSize: '1.8rem', lineHeight: 1,
+            color: 'rgba(255,255,255,0.65)', fontSize: '2rem', lineHeight: 1,
             transition: 'color 0.2s',
           }}
           onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
-          aria-label="Закрыть"
+          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.65)'}
         >
           ✕
         </button>
-
-        {/* Video title */}
         {title && (
-          <p style={{
-            color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem',
-            marginBottom: '12px', textAlign: 'center',
-          }}>
+          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.92rem', marginBottom: '10px', textAlign: 'center' }}>
             {title}
           </p>
         )}
-
-        {/* iframe */}
         <div style={{ position: 'relative', paddingTop: '56.25%', borderRadius: '12px', overflow: 'hidden' }}>
           <iframe
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
             title={title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            style={{
-              position: 'absolute', inset: 0,
-              width: '100%', height: '100%',
-              border: 'none',
-            }}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
           />
         </div>
       </div>
@@ -141,62 +117,82 @@ function VideoModal({ videoId, title, onClose }) {
   )
 }
 
-// ── Video card ────────────────────────────────────────────────
-function VideoCard({ video, onClick }) {
+// ── Video card ───────────────────────────────────────────────
+function VideoCard({ video, onYouTubeClick }) {
   const [hovered, setHovered] = useState(false)
-  const videoId = getVideoId(video.url)
-  const isPlaceholder = !videoId || video.url.includes('PLACEHOLDER')
+  const isYT = video.type === 'youtube'
+
+  const handleClick = () => {
+    if (isYT) {
+      onYouTubeClick()
+    } else {
+      window.open(video.url, '_blank', 'noopener,noreferrer')
+    }
+  }
 
   return (
     <div
-      onClick={!isPlaceholder ? onClick : undefined}
+      onClick={handleClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         borderRadius: '14px', overflow: 'hidden',
-        position: 'relative', cursor: isPlaceholder ? 'default' : 'pointer',
-        boxShadow: hovered ? '0 8px 32px rgba(0,0,0,0.5)' : '0 4px 20px rgba(0,0,0,0.3)',
+        position: 'relative', cursor: 'pointer',
+        boxShadow: hovered ? '0 8px 32px rgba(0,0,0,0.55)' : '0 4px 20px rgba(0,0,0,0.3)',
         aspectRatio: '16/10',
-        background: '#0f2040',
         transition: 'box-shadow 0.2s, transform 0.2s',
-        transform: hovered && !isPlaceholder ? 'translateY(-3px)' : 'none',
+        transform: hovered ? 'translateY(-3px)' : 'none',
+        background: '#0f2040',
       }}
     >
       {/* Thumbnail */}
-      {videoId && !isPlaceholder ? (
+      {isYT ? (
         <img
-          src={getThumb(videoId)}
+          src={getYtThumb(video.id)}
           alt={video.title}
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          onError={(e) => { e.target.style.display = 'none' }}
+          onError={(e) => { e.target.style.opacity = '0' }}
         />
       ) : (
+        /* TikTok placeholder — branded dark card */
         <div style={{
           width: '100%', height: '100%',
-          background: 'linear-gradient(135deg, #0f2040, #152a4a)',
+          background: 'linear-gradient(135deg, #010101 0%, #1a1a2e 100%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(110,168,222,0.3)" strokeWidth="1.5">
-            <rect x="2" y="7" width="20" height="15" rx="2"/>
-            <polyline points="17 2 12 7 7 2"/>
-          </svg>
+          <div style={{ opacity: 0.35 }}>
+            <TikTokIcon size={52} />
+          </div>
         </div>
       )}
 
       {/* Overlay */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: hovered && !isPlaceholder
-          ? 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.15) 55%)'
-          : 'linear-gradient(to top, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.08) 55%)',
+        background: hovered
+          ? 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.18) 55%)'
+          : 'linear-gradient(to top, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.06) 55%)',
         display: 'flex', flexDirection: 'column',
         justifyContent: 'space-between', alignItems: 'center',
         padding: '18px 16px',
         transition: 'background 0.2s',
       }}>
-        <div style={{ transform: hovered && !isPlaceholder ? 'scale(1.12)' : 'scale(1)', transition: 'transform 0.2s' }}>
-          <PlayBtn />
+        {/* Top: play or TikTok badge */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+          <PlayBtn hovered={hovered} />
+          {!isYT && (
+            <span style={{
+              background: 'rgba(0,0,0,0.55)', color: '#fff',
+              fontSize: '0.68rem', padding: '2px 8px', borderRadius: '20px',
+              border: '1px solid rgba(255,255,255,0.2)',
+              backdropFilter: 'blur(4px)',
+            }}>
+              TikTok · открыть →
+            </span>
+          )}
         </div>
+
+        {/* Bottom: title */}
         <p style={{
           color: '#fff', fontSize: '0.84rem', fontWeight: 500,
           textAlign: 'center', lineHeight: 1.4, margin: 0,
@@ -208,12 +204,29 @@ function VideoCard({ video, onClick }) {
   )
 }
 
-// ── Main component ────────────────────────────────────────────
+// ── Pagination ───────────────────────────────────────────────
+const VIDEOS_PER_PAGE = 3
+
+function buildPages(videos) {
+  const pages = []
+  for (let i = 0; i < videos.length; i += VIDEOS_PER_PAGE) {
+    pages.push(videos.slice(i, i + VIDEOS_PER_PAGE))
+  }
+  return pages
+}
+
+// ── Main component ───────────────────────────────────────────
 export default function Media() {
   const [page, setPage] = useState(0)
-  const [modal, setModal] = useState(null) // { videoId, title }
+  const [modal, setModal] = useState(null)
 
   const PAGES = buildPages(VIDEOS)
+  const currentVideos = PAGES[page] ?? []
+
+  // For a partial last page: center the remaining videos
+  const gridCols = currentVideos.length < VIDEOS_PER_PAGE
+    ? `repeat(${currentVideos.length}, minmax(0, 320px))`
+    : 'repeat(3, 1fr)'
 
   return (
     <section id="media" style={{ background: 'var(--dark)', padding: '80px 0' }}>
@@ -230,15 +243,17 @@ export default function Media() {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-          {PAGES[page]?.map((video, i) => (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: gridCols,
+          gap: '24px',
+          justifyContent: currentVideos.length < VIDEOS_PER_PAGE ? 'center' : 'initial',
+        }}>
+          {currentVideos.map((video, i) => (
             <VideoCard
               key={i}
               video={video}
-              onClick={() => {
-                const id = getVideoId(video.url)
-                if (id) setModal({ videoId: id, title: video.title })
-              }}
+              onYouTubeClick={() => setModal({ videoId: video.id, title: video.title })}
             />
           ))}
         </div>
@@ -267,10 +282,10 @@ export default function Media() {
 
       <style>{`
         @media (max-width: 820px) {
-          #media .container > div:first-of-type { grid-template-columns: 1fr 1fr !important; }
+          #media .container > div:nth-child(2) { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 540px) {
-          #media .container > div:first-of-type { grid-template-columns: 1fr !important; }
+          #media .container > div:nth-child(2) { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
