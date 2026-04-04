@@ -152,7 +152,7 @@ export default function Hero() {
         }
         @media (max-width: 768px) {
           .hero-section {
-            background-position: 42% center;
+            background-position: 12% center;
             background-image:
               linear-gradient(rgba(5,15,35,0.68), rgba(5,15,35,0.68)),
               url('/photo-dorit-contact.png');
