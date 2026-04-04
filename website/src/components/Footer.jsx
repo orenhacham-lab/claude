@@ -29,13 +29,13 @@ export default function Footer() {
       }}>
         {/* Social */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <a href="#" aria-label="Instagram" style={{ color: 'rgba(255,255,255,0.6)', transition: 'color .2s' }}
+          <a href="https://www.instagram.com/doritgitterman/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ color: 'rgba(255,255,255,0.6)', transition: 'color .2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#fff'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
           >
             <InstagramIcon />
           </a>
-          <a href="#" aria-label="Facebook" style={{ color: 'rgba(255,255,255,0.6)', transition: 'color .2s' }}
+          <a href="https://www.facebook.com/doritgt/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style={{ color: 'rgba(255,255,255,0.6)', transition: 'color .2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#fff'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
           >
@@ -52,17 +52,29 @@ export default function Footer() {
             054-2002707
           </a>
           <span style={{ color: 'rgba(255,255,255,0.25)' }}>|</span>
-          <a href="mailto:mail@gmail.com" style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.9rem', transition: 'color .2s' }}
+          <a href="mailto:doritgt@gmail.com" style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.9rem', transition: 'color .2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.75)'}
           >
-            mail@gmail.com
+            doritgt@gmail.com
           </a>
         </div>
 
-        {/* Copyright */}
-        <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}>
-          © 2025 Дорит Гитерман — Адвокат
+        {/* Copyright + credit */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
+          <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}>
+            © 2026 Дорит Гитерман — Адвокат
+          </div>
+          <div style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.72rem' }}>
+            האתר נבנה ע״י{' '}
+            <a href="https://www.gotop.co.il" target="_blank" rel="noopener noreferrer"
+              style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'underline', transition: 'color .2s' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
+              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+            >
+              Go Top
+            </a>
+          </div>
         </div>
       </div>
     </footer>

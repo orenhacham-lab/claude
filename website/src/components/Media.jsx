@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 
 const VIDEOS = [
   { type: 'youtube', id: 'e3D4BwGsAi8',  title: 'Уголовное право: стратегия защиты и опыт адвоката' },
-  { type: 'tiktok',  url: 'https://vt.tiktok.com/ZSPJsKAmh/', title: 'Права при задержании: что нужно знать' },
+  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7481233802313026823', title: 'Права при задержании: что нужно знать' },
   { type: 'youtube', id: 'kbL5SORQa-U',  title: 'Насилие в семье: юридическая защита и ваши права' },
-  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7481169459005246727', title: 'Что делать при аресте: советы уголовного адвоката' },
 ]
 
 function getYtThumb(id) {
@@ -56,7 +55,17 @@ function VideoModal({ videoId, title, onClose }) {
 
 function VideoCard({ video, onYouTubeClick }) {
   const [hovered, setHovered] = useState(false)
+  const [tikThumb, setTikThumb] = useState(null)
   const isYT = video.type === 'youtube'
+
+  useEffect(() => {
+    if (video.type === 'tiktok') {
+      fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(video.url)}`)
+        .then(r => r.json())
+        .then(d => { if (d.thumbnail_url) setTikThumb(d.thumbnail_url) })
+        .catch(() => {})
+    }
+  }, [video])
 
   return (
     <div
@@ -82,8 +91,22 @@ function VideoCard({ video, onYouTubeClick }) {
           alt={video.title}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         />
+      ) : tikThumb ? (
+        <img
+          src={tikThumb}
+          alt={video.title}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+        />
       ) : (
-        <div style={{ position: 'absolute', inset: 0, background: '#0c1829' }} />
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(135deg, #0c1829 0%, #1a2f50 100%)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z" fill="rgba(255,255,255,0.3)"/>
+          </svg>
+        </div>
       )}
 
       {/* Hover overlay — ONLY on hover */}
