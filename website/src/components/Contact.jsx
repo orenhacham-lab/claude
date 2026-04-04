@@ -5,39 +5,60 @@ export default function Contact() {
   const [sent, setSent] = useState(false)
 
   return (
-    <section
-      id="contact"
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        minHeight: '660px',
-        backgroundImage: `
-          linear-gradient(to right,
-            rgba(5,15,35,0.20) 0%,
-            rgba(5,15,35,0.40) 30%,
-            rgba(5,15,35,0.75) 55%,
-            rgba(5,15,35,0.95) 75%
-          ),
-          url('/photo-dorit-contact.png')
-        `,
-        backgroundSize: 'cover',
-        backgroundPosition: '20% center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      {/* Content grid — left spacer keeps woman visible, right has form */}
+    <section id="contact" style={{ position: 'relative', overflow: 'hidden', minHeight: '660px' }}>
+
+      {/* Office/library background — blurred */}
       <div style={{
-        position: 'relative', zIndex: 1,
+        position: 'absolute', inset: 0, zIndex: 0,
+        backgroundImage: 'url(/bg-library.svg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        filter: 'blur(5px)',
+        transform: 'scale(1.06)',
+      }} />
+
+      {/* Dark blue overlay — continuous across full width */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 1,
+        background: 'linear-gradient(to right, rgba(5,14,34,0.38) 0%, rgba(5,14,34,0.65) 40%, rgba(5,14,34,0.93) 100%)',
+      }} />
+
+      {/* photo-dorit.png — foreground person, left side, no box */}
+      <div style={{
+        position: 'absolute', zIndex: 2,
+        left: 0, bottom: 0,
+        width: '46%', height: '100%',
+        overflow: 'hidden',
+        pointerEvents: 'none',
+      }}>
+        <img
+          src="/photo-dorit.png"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: '-10px',
+            height: '100%',
+            width: 'auto',
+            maxWidth: 'none',
+          }}
+        />
+      </div>
+
+      {/* Content grid */}
+      <div style={{
+        position: 'relative', zIndex: 3,
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         display: 'grid',
         gridTemplateColumns: '44% 56%',
         minHeight: '660px',
       }}>
 
-        {/* Left — transparent spacer so woman in background photo shows through */}
+        {/* Left — transparent spacer, person is absolute */}
         <div />
 
-        {/* Right — text + form */}
+        {/* Right — form content */}
         <div style={{
           display: 'flex', flexDirection: 'column', justifyContent: 'center',
           padding: '72px 0 72px 40px',
@@ -59,8 +80,7 @@ export default function Contact() {
 
           <p style={{
             color: 'rgba(255,255,255,0.65)',
-            fontSize: '1rem', lineHeight: 1.65,
-            marginBottom: '28px',
+            fontSize: '1rem', lineHeight: 1.65, marginBottom: '28px',
           }}>
             Оставьте данные и мы свяжемся с вами в ближайшее время
           </p>
@@ -80,16 +100,10 @@ export default function Contact() {
               onSubmit={e => { e.preventDefault(); setSent(true) }}
               style={{ display: 'flex', flexDirection: 'column', gap: '14px', maxWidth: '460px' }}
             >
-              <input
-                className="form-input-dark" type="text" placeholder="Полное имя *"
-                value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                required
-              />
-              <input
-                className="form-input-dark" type="tel" placeholder="Телефон *"
-                value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
-                required
-              />
+              <input className="form-input-dark" type="text" placeholder="Полное имя *"
+                value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
+              <input className="form-input-dark" type="tel" placeholder="Телефон *"
+                value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} required />
               <button type="submit" className="btn-submit">Отправить</button>
             </form>
           )}
@@ -98,9 +112,10 @@ export default function Contact() {
 
       <style>{`
         @media (max-width: 820px) {
-          #contact > div { grid-template-columns: 1fr !important; min-height: auto !important; }
-          #contact > div > div:first-child { display: none; }
-          #contact > div > div:last-child { padding: 60px 0 !important; }
+          #contact > div[style*="grid"] { grid-template-columns: 1fr !important; min-height: auto !important; }
+          #contact > div[style*="grid"] > div:first-child { display: none; }
+          #contact > div[style*="zIndex: 2"] { display: none; }
+          #contact > div[style*="grid"] > div:last-child { padding: 60px 0 !important; }
         }
       `}</style>
     </section>

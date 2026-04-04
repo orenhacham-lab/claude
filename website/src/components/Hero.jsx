@@ -52,7 +52,7 @@ export default function Hero() {
         url('/photo-dorit-contact.png')
       `,
       backgroundSize: 'cover',
-      backgroundPosition: 'left center',
+      backgroundPosition: '48% 35%',
       backgroundRepeat: 'no-repeat',
     }}>
 
