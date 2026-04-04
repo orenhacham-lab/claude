@@ -5,60 +5,36 @@ export default function Contact() {
   const [sent, setSent] = useState(false)
 
   return (
-    <section id="contact" style={{ position: 'relative', overflow: 'hidden', minHeight: '580px' }}>
-
-      {/* Full-width background — same library image as hero */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 0,
-        backgroundImage: 'url(/bg-library.svg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        filter: 'blur(5px)',
-        transform: 'scale(1.06)',
-      }} />
-
-      {/* Dark blue overlay across full width */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: `
-          linear-gradient(to right, rgba(5,14,34,0.45) 0%, rgba(5,14,34,0.72) 40%, rgba(5,14,34,0.94) 100%),
-          rgba(6,16,44,0.35)
-        `,
-      }} />
-
-      {/* Woman — left edge, full section height, not boxed */}
-      <div style={{
-        position: 'absolute', zIndex: 2,
-        left: 0, bottom: 0,
-        width: '44%', height: '100%',
+    <section
+      id="contact"
+      style={{
+        position: 'relative',
         overflow: 'hidden',
-        pointerEvents: 'none',
-      }}>
-        <img
-          src="/photo-dorit.png"
-          alt=""
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: '-10px',
-            height: '100%',
-            width: 'auto',
-            maxWidth: 'none',
-          }}
-        />
-      </div>
-
-      {/* Content — right side of banner */}
+        minHeight: '580px',
+        backgroundImage: `
+          linear-gradient(to right,
+            rgba(5,15,35,0.20) 0%,
+            rgba(5,15,35,0.40) 30%,
+            rgba(5,15,35,0.75) 55%,
+            rgba(5,15,35,0.95) 75%
+          ),
+          url('/photo-dorit-contact.png')
+        `,
+        backgroundSize: 'auto, cover',
+        backgroundPosition: 'center, left center',
+        backgroundRepeat: 'no-repeat, no-repeat',
+      }}
+    >
+      {/* Content grid — left spacer keeps woman visible, right has form */}
       <div style={{
-        position: 'relative', zIndex: 3,
+        position: 'relative', zIndex: 1,
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         display: 'grid',
         gridTemplateColumns: '44% 56%',
         minHeight: '580px',
       }}>
 
-        {/* Left — empty, woman is absolute */}
+        {/* Left — transparent spacer so woman in background photo shows through */}
         <div />
 
         {/* Right — text + form */}
@@ -122,15 +98,9 @@ export default function Contact() {
 
       <style>{`
         @media (max-width: 820px) {
-          #contact > div[style*="grid"] {
-            grid-template-columns: 1fr !important;
-            min-height: auto !important;
-          }
-          #contact > div[style*="grid"] > div:first-child { display: none; }
-          #contact > div[style*="44%"] { display: none; }
-          #contact > div[style*="grid"] > div:last-child {
-            padding: 60px 0 !important;
-          }
+          #contact > div { grid-template-columns: 1fr !important; min-height: auto !important; }
+          #contact > div > div:first-child { display: none; }
+          #contact > div > div:last-child { padding: 60px 0 !important; }
         }
       `}</style>
     </section>
