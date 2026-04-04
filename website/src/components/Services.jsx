@@ -1,8 +1,12 @@
 const SERVICES = [
   {
     icon: (
+      // Gavel
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <path d="M14 2l8 8-2 2-8-8 2-2z"/>
+        <path d="M2 22l10-10"/>
+        <path d="M5 15l4 4"/>
+        <path d="M15 5l4 4"/>
       </svg>
     ),
     title: 'Охранные ордера и ограничительные меры',
@@ -10,9 +14,13 @@ const SERVICES = [
   },
   {
     icon: (
+      // Handcuffs
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-        <path d="M7 11V7a5 5 0 0110 0v4"/>
+        <circle cx="7" cy="12" r="3"/>
+        <circle cx="17" cy="12" r="3"/>
+        <path d="M10 12h4"/>
+        <path d="M4 12H2"/>
+        <path d="M20 12h2"/>
       </svg>
     ),
     title: 'Аресты по делам о насилии',
@@ -20,12 +28,9 @@ const SERVICES = [
   },
   {
     icon: (
+      // Megaphone / speaking face
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 8h1a4 4 0 010 8h-1"/>
-        <path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
-        <line x1="6" y1="1" x2="6" y2="4"/>
-        <line x1="10" y1="1" x2="10" y2="4"/>
-        <line x1="14" y1="1" x2="14" y2="4"/>
+        <path d="M3 11l19-9-9 19-2-8-8-2z"/>
       </svg>
     ),
     title: 'Насилие в семье',
@@ -33,11 +38,12 @@ const SERVICES = [
   },
   {
     icon: (
+      // Parent-child / family
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-        <path d="M16 3.13a4 4 0 010 7.75"/>
+        <circle cx="9" cy="6" r="3"/>
+        <path d="M3 20v-2a6 6 0 0112 0v2"/>
+        <circle cx="18" cy="10" r="2"/>
+        <path d="M14 20v-1a4 4 0 018 0v1"/>
       </svg>
     ),
     title: 'Защита родителей и несовершеннолетних',
@@ -45,9 +51,10 @@ const SERVICES = [
   },
   {
     icon: (
+      // Broken heart
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-        <line x1="12" y1="12" x2="12" y2="12" strokeWidth="3"/>
+        <polyline points="12 8 10 13 14 13 12 18"/>
       </svg>
     ),
     title: 'Насилие между супругами',
@@ -55,8 +62,13 @@ const SERVICES = [
   },
   {
     icon: (
+      // Family / group protection
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+        <path d="M16 3.13a4 4 0 010 7.75"/>
+        <path d="M9 14l2 2 4-4" strokeWidth="1.5"/>
       </svg>
     ),
     title: 'Угрозы и запугивание в семье',
