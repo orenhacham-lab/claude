@@ -42,12 +42,52 @@ export default function Hero() {
 
   return (
     <section style={{
-      background: '#0b1729',
-      paddingTop: '72px',
+      position: 'relative',
       minHeight: '100vh',
+      paddingTop: '72px',
       overflow: 'hidden',
     }}>
+
+      {/* Layer 1 — blurred background image */}
       <div style={{
+        position: 'absolute',
+        inset: 0,
+        backgroundImage: 'url(/photo-dorit-contact.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        filter: 'blur(6px)',
+        transform: 'scale(1.1)',
+        zIndex: 0,
+      }} />
+
+      {/* Layer 2 — dark blue gradient overlay */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'linear-gradient(90deg, rgba(5,15,35,0.85) 0%, rgba(5,15,35,0.6) 40%, rgba(5,15,35,0.2) 70%)',
+        zIndex: 1,
+      }} />
+
+      {/* Layer 3 — person image, anchored left */}
+      <img
+        src="/photo-dorit.png"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          height: '115%',
+          width: 'auto',
+          zIndex: 2,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Content — right side */}
+      <div style={{
+        position: 'relative',
+        zIndex: 3,
         maxWidth: '1240px',
         margin: '0 auto',
         padding: '0 28px',
@@ -56,25 +96,10 @@ export default function Hero() {
         gridTemplateColumns: '2fr 3fr',
       }}>
 
-        {/* Left: image column */}
-        <div style={{ position: 'relative', overflow: 'hidden', height: '100%' }}>
-          <img
-            src="/photo-dorit.png"
-            alt="Дорит Гитерман — адвокат"
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              height: '100%',
-              width: 'auto',
-              maxWidth: 'none',
-              display: 'block',
-            }}
-          />
-        </div>
+        {/* Left cell — empty, person image is absolute behind */}
+        <div />
 
-        {/* Right: content column */}
+        {/* Right cell — text content */}
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -184,18 +209,20 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 860px) {
-          section > div[style*="grid"] {
+          section > div[style*="grid-template-columns"] {
             grid-template-columns: 1fr !important;
             height: auto !important;
-            padding-top: 40px;
+            padding-top: 32px;
+            padding-bottom: 48px;
           }
-          section > div[style*="grid"] > div:first-child {
+          section > div[style*="grid-template-columns"] > div:first-child {
             display: none;
           }
-          section > div[style*="grid"] > div:last-child {
+          section > div[style*="grid-template-columns"] > div:last-child {
             padding-left: 0 !important;
             max-width: 100% !important;
           }
+          section > img { display: none; }
         }
       `}</style>
     </section>
