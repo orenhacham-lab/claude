@@ -6,8 +6,8 @@ const NAV_LINKS = [
   { label: 'О нас', href: '#about' },
   { label: 'В СМИ', href: '#media' },
   { label: 'Вопросы и ответы', href: '#faq' },
-  { label: 'Контакт', href: '#contact' },
   { label: 'Отзывы', href: '#reviews' },
+  { label: 'Контакт', href: '#contact' },
 ]
 
 function ScalesIcon() {
