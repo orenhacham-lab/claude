@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(() => !localStorage.getItem('cookie_consent'))
@@ -7,11 +8,6 @@ export default function CookieBanner() {
 
   function accept() {
     localStorage.setItem('cookie_consent', 'accepted')
-    setVisible(false)
-  }
-
-  function decline() {
-    localStorage.setItem('cookie_consent', 'declined')
     setVisible(false)
   }
 
@@ -25,7 +21,8 @@ export default function CookieBanner() {
       flexWrap: 'wrap', gap: '14px',
     }}>
       <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.9rem', lineHeight: 1.5, flex: '1 1 300px', margin: 0 }}>
-        Мы используем файлы cookie для улучшения работы сайта, анализа трафика и показа рекламы.
+        Мы используем файлы cookie. Продолжая пользоваться сайтом, вы соглашаетесь с их использованием в соответствии с{' '}
+        <Link to="/privacy" style={{ color: '#6ea8de', textDecoration: 'underline' }}>Политикой конфиденциальности</Link>.
       </p>
       <div style={{ display: 'flex', gap: '12px', flexShrink: 0 }}>
         <button
@@ -37,16 +34,6 @@ export default function CookieBanner() {
           }}
         >
           Принять
-        </button>
-        <button
-          onClick={decline}
-          style={{
-            padding: '9px 24px', background: 'transparent', color: 'rgba(255,255,255,0.6)',
-            borderRadius: '50px', fontWeight: 500, fontSize: '0.9rem',
-            border: '1px solid rgba(255,255,255,0.2)', cursor: 'pointer', fontFamily: 'inherit',
-          }}
-        >
-          Отклонить
         </button>
       </div>
     </div>
