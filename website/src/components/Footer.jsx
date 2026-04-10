@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function InstagramIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -22,6 +24,25 @@ export default function Footer() {
       background: '#070e1a',
       borderTop: '1px solid rgba(110,168,222,0.1)',
     }}>
+      {/* Legal links */}
+      <div className="container" style={{
+        display: 'flex', justifyContent: 'center', gap: '24px',
+        padding: '10px 28px 0', flexWrap: 'wrap',
+      }}>
+        <Link to="/privacy" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', transition: 'color .2s' }}
+          onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
+          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+        >
+          Политика конфиденциальности
+        </Link>
+        <Link to="/accessibility" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', transition: 'color .2s' }}
+          onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
+          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+        >
+          Декларация доступности
+        </Link>
+      </div>
+
       {/* Main footer bar */}
       <div className="container" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
