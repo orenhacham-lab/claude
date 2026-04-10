@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const NAV_LINKS = [
-  { label: 'Отзывы', href: '#reviews' },
   { label: 'Практика', href: '#services' },
   { label: 'О нас', href: '#about' },
   { label: 'В СМИ', href: '#media' },
   { label: 'Вопросы и ответы', href: '#faq' },
   { label: 'Контакт', href: '#contact' },
+  { label: 'Отзывы', href: '#reviews' },
 ]
 
 function ScalesIcon() {
