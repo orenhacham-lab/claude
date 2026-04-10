@@ -20,7 +20,7 @@ export default function CookieBanner() {
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       flexWrap: 'wrap', gap: '14px',
     }}>
-      <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.9rem', lineHeight: 1.5, flex: '1 1 300px', margin: 0 }}>
+      <p className="cookie-text" style={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.9rem', lineHeight: 1.5, flex: '1 1 300px', margin: 0 }}>
         Мы используем файлы cookie. Продолжая пользоваться сайтом, вы соглашаетесь с их использованием в соответствии с{' '}
         <Link to="/privacy" style={{ color: '#6ea8de', textDecoration: 'underline' }}>Политикой конфиденциальности</Link>.
       </p>
@@ -36,6 +36,11 @@ export default function CookieBanner() {
           Принять
         </button>
       </div>
+      <style>{`
+        @media (max-width: 600px) {
+          .cookie-text { font-size: 13px !important; line-height: 1.4 !important; }
+        }
+      `}</style>
     </div>
   )
 }

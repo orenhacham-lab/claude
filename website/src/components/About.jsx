@@ -40,7 +40,8 @@ export default function About() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: '56px', alignItems: 'start' }}>
 
           {/* Left: Bio + CTA */}
-          <div>
+          <div className="about-bio-col">
+            <div className="about-bio-text">
             <p style={{ color: 'rgba(255,255,255,0.82)', lineHeight: 1.82, marginBottom: '18px', fontSize: '0.97rem' }}>
               Адвокат Дорит Гитерман — опытный уголовный адвокат с 25 годами практики в судах первой инстанции,
               Окружном суде и Верховном суде Израиля. Родилась в Беэр-Шеве, переехала в Тель-Авив в 20 лет и с тех пор
@@ -55,6 +56,7 @@ export default function About() {
               Для Дорит уголовное право — это не просто профессия. Это миссия: стать лучшим уголовным адвокатом,
               которым она способна быть.
             </p>
+            </div>
 
             <a
               href="#contact"
@@ -67,7 +69,7 @@ export default function About() {
           </div>
 
           {/* Right: Achievement boxes 2×3 */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div className="about-cards-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
             {ACHIEVEMENTS.map((a, i) => (
               <div key={i} style={{
                 background: 'rgba(12,24,50,0.6)',
@@ -96,6 +98,9 @@ export default function About() {
         @media (max-width: 860px) {
           #about .container > div:last-child { grid-template-columns: 1fr !important; gap: 32px !important; }
           #about .container > div:last-child > div:last-child { grid-template-columns: 1fr 1fr !important; }
+          .about-bio-col { display: contents; }
+          .about-cards-col { order: 1; }
+          .about-cta-btn { order: 2; margin-top: 0 !important; }
         }
         @media (max-width: 600px) {
           .about-cta-btn { display: inline-flex !important; }
