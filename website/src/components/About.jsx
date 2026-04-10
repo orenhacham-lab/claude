@@ -59,7 +59,7 @@ export default function About() {
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
-              className="btn-outline"
+              className="btn-outline about-cta-btn"
               style={{ fontSize: '0.95rem', padding: '13px 30px' }}
             >
               ← Бесплатная консультация
@@ -96,6 +96,9 @@ export default function About() {
         @media (max-width: 860px) {
           #about .container > div:last-child { grid-template-columns: 1fr !important; gap: 32px !important; }
           #about .container > div:last-child > div:last-child { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 600px) {
+          .about-cta-btn { display: inline-flex !important; }
         }
         @media (max-width: 480px) {
           #about .container > div:last-child > div:last-child { grid-template-columns: 1fr !important; }

@@ -58,7 +58,7 @@ export default function CTABanner() {
           #cta-banner .container > div { grid-template-columns: 1fr !important; }
           #cta-banner .container > div > div:first-child { padding: 36px 28px !important; }
           #cta-banner .container > div > div:last-child { min-height: 220px; }
-          #cta-banner .cta-btn { align-self: stretch !important; text-align: center; justify-content: center; }
+          #cta-banner .cta-btn { display: flex !important; align-self: stretch !important; text-align: center; justify-content: center; }
         }
       `}</style>
     </section>
