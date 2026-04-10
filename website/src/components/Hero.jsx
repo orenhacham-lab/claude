@@ -50,6 +50,8 @@ export default function Hero() {
     const { error } = await submitLead({ full_name: form.name, phone: form.phone, form_source: 'hero' })
     setSubmitting(false)
     if (error) { setSubmitError('Ошибка отправки. Попробуйте позже.'); return }
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({ event: 'form_submit_success', full_name: form.name, phone: form.phone, form_source: 'hero' })
     setSent(true)
   }
 
