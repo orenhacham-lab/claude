@@ -100,7 +100,7 @@ export default function About() {
           #about .container > div:last-child > div:last-child { grid-template-columns: 1fr 1fr !important; }
           .about-bio-col { display: contents; }
           .about-cards-col { order: 1; }
-          .about-cta-btn { order: 2; margin-top: 0 !important; }
+          .about-cta-btn { order: 2; margin-top: 0 !important; justify-self: start; width: fit-content; }
         }
         @media (max-width: 600px) {
           .about-cta-btn { display: inline-flex !important; }
