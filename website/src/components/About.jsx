@@ -64,7 +64,7 @@ export default function About() {
               className="btn-outline about-cta-btn"
               style={{ fontSize: '0.95rem', padding: '13px 30px' }}
             >
-              ← Бесплатная консультация
+              Бесплатная консультация →
             </a>
           </div>
 

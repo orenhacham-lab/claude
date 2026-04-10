@@ -28,7 +28,7 @@ export default function CTABanner() {
               className="btn-outline cta-btn"
               style={{ alignSelf: 'flex-start' }}
             >
-              ← Бесплатная консультация
+              Бесплатная консультация →
             </a>
           </div>
 
