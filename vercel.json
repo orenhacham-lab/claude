@@ -2,5 +2,13 @@
   "buildCommand": "cd website && npm install && npm run build",
   "outputDirectory": "website/dist",
   "installCommand": "cd website && npm install",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "missing": [{ "type": "host", "value": "www.law-giterman.co.il" }],
+      "destination": "https://www.law-giterman.co.il/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
