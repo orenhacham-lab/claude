@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function InstagramIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -22,6 +24,25 @@ export default function Footer() {
       background: '#070e1a',
       borderTop: '1px solid rgba(110,168,222,0.1)',
     }}>
+      {/* Legal links */}
+      <div className="container" style={{
+        display: 'flex', justifyContent: 'center', gap: '24px',
+        padding: '10px 28px 0', flexWrap: 'wrap',
+      }}>
+        <Link to="/privacy" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', transition: 'color .2s' }}
+          onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
+          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+        >
+          Политика конфиденциальности
+        </Link>
+        <Link to="/accessibility" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', transition: 'color .2s' }}
+          onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
+          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+        >
+          Декларация доступности
+        </Link>
+      </div>
+
       {/* Main footer bar */}
       <div className="container" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -29,13 +50,13 @@ export default function Footer() {
       }}>
         {/* Social */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <a href="#" aria-label="Instagram" style={{ color: 'rgba(255,255,255,0.6)', transition: 'color .2s' }}
+          <a href="https://www.instagram.com/doritgitterman/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ color: 'rgba(255,255,255,0.6)', transition: 'color .2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#fff'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
           >
             <InstagramIcon />
           </a>
-          <a href="#" aria-label="Facebook" style={{ color: 'rgba(255,255,255,0.6)', transition: 'color .2s' }}
+          <a href="https://www.facebook.com/doritgt/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style={{ color: 'rgba(255,255,255,0.6)', transition: 'color .2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#fff'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
           >
@@ -52,17 +73,29 @@ export default function Footer() {
             054-2002707
           </a>
           <span style={{ color: 'rgba(255,255,255,0.25)' }}>|</span>
-          <a href="mailto:mail@gmail.com" style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.9rem', transition: 'color .2s' }}
+          <a href="mailto:doritgt@gmail.com" style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.9rem', transition: 'color .2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.75)'}
           >
-            mail@gmail.com
+            doritgt@gmail.com
           </a>
         </div>
 
-        {/* Copyright */}
-        <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}>
-          © 2025 Дорит Гитерман — Адвокат
+        {/* Copyright + credit */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
+          <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}>
+            © 2026 Дорит Гитерман — Адвокат
+          </div>
+          <div style={{ color: '#fff', fontSize: '0.72rem' }}>
+            Web Design by{' '}
+            <a href="https://www.gotop.co.il" target="_blank" rel="noopener noreferrer"
+              style={{ color: '#fff', textDecoration: 'underline', transition: 'color .2s' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
+              onMouseLeave={e => e.currentTarget.style.color = '#fff'}
+            >
+              Go Top
+            </a>
+          </div>
         </div>
       </div>
     </footer>

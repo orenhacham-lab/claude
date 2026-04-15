@@ -1,19 +1,18 @@
 function PinIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6ea8de" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-      <circle cx="12" cy="10" r="3"/>
+      <path d="M14 2l8 8-2 2-1.5-1.5-7 7 .5 3.5-2 2-4-4-4.5 4.5-1.5-1.5 4.5-4.5-4-4 2-2 3.5.5 7-7L14 2z"/>
     </svg>
   )
 }
 
 const ACHIEVEMENTS = [
-  'Работа в прокуратуре Зиглман под руководством адвоката Эли Зоар ז"ל.',
-  'Выступления в районном суде перед судьёй Д-р Ади Азаром ז"ל, сопровождавшим её карьеру до сегодняшнего дня.',
+  'Работа в прокуратуре Зиглман под руководством адвоката Эли Зоар Царство небесное.',
+  'Выступления в районном суде перед судьёй Д-р Ади Азаром Царство небесное, сопровождавшим её карьеру до сегодняшнего дня.',
   'Профессиональное взаимодействие с ведущими адвокатами Тель-Авива и Нацерета, совместная работа над сложными уголовными делами.',
   'Представление уголовных дел и клиентов, которые сегодня сами преподают в правовой академии.',
   'Клиенты с резонансными делами выбирают Дорит — защита от государственных обвинений и работа с секретными материалами.',
-  'Участие в подготовке дела Эхуда Олмерта совместно с адвокатом Эли Зоар ז"ל и адвокатом Рами Касег.',
+  'Участие в подготовке дела Эхуда Олмерта совместно с адвокатом Эли Зоар Царство небесное и адвокатом Рами Касег.',
 ]
 
 export default function About() {
@@ -41,7 +40,8 @@ export default function About() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: '56px', alignItems: 'start' }}>
 
           {/* Left: Bio + CTA */}
-          <div>
+          <div className="about-bio-col">
+            <div className="about-bio-text">
             <p style={{ color: 'rgba(255,255,255,0.82)', lineHeight: 1.82, marginBottom: '18px', fontSize: '0.97rem' }}>
               Адвокат Дорит Гитерман — опытный уголовный адвокат с 25 годами практики в судах первой инстанции,
               Окружном суде и Верховном суде Израиля. Родилась в Беэр-Шеве, переехала в Тель-Авив в 20 лет и с тех пор
@@ -56,19 +56,20 @@ export default function About() {
               Для Дорит уголовное право — это не просто профессия. Это миссия: стать лучшим уголовным адвокатом,
               которым она способна быть.
             </p>
+            </div>
 
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
-              className="btn-outline"
+              className="btn-outline about-cta-btn"
               style={{ fontSize: '0.95rem', padding: '13px 30px' }}
             >
-              ← Бесплатная консультация
+              Бесплатная консультация →
             </a>
           </div>
 
           {/* Right: Achievement boxes 2×3 */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div className="about-cards-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
             {ACHIEVEMENTS.map((a, i) => (
               <div key={i} style={{
                 background: 'rgba(12,24,50,0.6)',
@@ -97,6 +98,12 @@ export default function About() {
         @media (max-width: 860px) {
           #about .container > div:last-child { grid-template-columns: 1fr !important; gap: 32px !important; }
           #about .container > div:last-child > div:last-child { grid-template-columns: 1fr 1fr !important; }
+          .about-bio-col { display: contents; }
+          .about-cards-col { order: 1; }
+          .about-cta-btn { order: 2; margin-top: 0 !important; justify-self: start; width: fit-content; }
+        }
+        @media (max-width: 600px) {
+          .about-cta-btn { display: inline-flex !important; }
         }
         @media (max-width: 480px) {
           #about .container > div:last-child > div:last-child { grid-template-columns: 1fr !important; }

@@ -1,6 +1,6 @@
 export default function CTABanner() {
   return (
-    <section style={{ background: 'var(--light-bg)', padding: '60px 0' }}>
+    <section id="cta-banner" style={{ background: 'var(--light-bg)', padding: '60px 0' }}>
       <div className="container">
         <div style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr',
@@ -25,31 +25,28 @@ export default function CTABanner() {
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
-              className="btn-outline"
+              className="btn-outline cta-btn"
               style={{ alignSelf: 'flex-start' }}
             >
-              ← Бесплатная консультация
+              Бесплатная консультация →
             </a>
           </div>
 
           {/* Right: Photo — transparent PNG on dark bg */}
           <div style={{
             background: 'linear-gradient(135deg, #1a2f50, #0c1829)',
-            display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
             overflow: 'hidden', position: 'relative',
+            padding: 0, margin: 0,
           }}>
             <img
               src="/photo-dorit-cta.png"
               alt="Дорит Гитерман"
               style={{
-                maxWidth: '100%',
-                maxHeight: '100%',
-                width: 'auto',
-                height: '100%',
-                objectFit: 'contain',
-                objectPosition: 'bottom center',
                 display: 'block',
-                filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.5))',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center top',
               }}
             />
           </div>
@@ -58,8 +55,10 @@ export default function CTABanner() {
 
       <style>{`
         @media (max-width: 720px) {
-          section > .container > div { grid-template-columns: 1fr !important; }
-          section > .container > div > div:last-child { min-height: 220px; }
+          #cta-banner .container > div { grid-template-columns: 1fr !important; }
+          #cta-banner .container > div > div:first-child { padding: 36px 28px !important; }
+          #cta-banner .container > div > div:last-child { min-height: 220px; }
+          #cta-banner .cta-btn { display: flex !important; align-self: stretch !important; text-align: center; justify-content: center; }
         }
       `}</style>
     </section>

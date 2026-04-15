@@ -1,114 +1,119 @@
 import { useState } from 'react'
+import { submitLead } from '../lib/supabase'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', phone: '' })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault()
+    setSubmitting(true)
+    setSubmitError(null)
+    const { error } = await submitLead({ full_name: form.name, phone: form.phone, form_source: 'contact' })
+    setSubmitting(false)
+    if (error) { setSubmitError('Ошибка отправки. Попробуйте позже.'); return }
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({ event: 'form_submit_success', full_name: form.name, phone: form.phone, form_source: 'contact' })
     setSent(true)
   }
 
   return (
     <section id="contact" style={{
-      background: 'linear-gradient(135deg, #0e1e35 0%, #0c1829 50%, #111f3a 100%)',
-      padding: '80px 0 0',
-      position: 'relative', overflow: 'hidden', minHeight: '600px',
+      position: 'relative', overflow: 'hidden', minHeight: '660px',
+      backgroundImage: `
+        linear-gradient(to right, rgba(5,14,34,0.25) 0%, rgba(5,14,34,0.68) 48%, rgba(5,14,34,0.95) 100%),
+        url('/photo-dorit.png'),
+        url('/bg-library.svg')
+      `,
+      backgroundSize: 'cover, auto 100%, cover',
+      backgroundPosition: 'center, left bottom, center',
+      backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
+      backgroundColor: '#050e22',
     }}>
-      {/* Subtle bg pattern */}
+
+      {/* Content grid */}
       <div style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(110,168,222,0.06) 0%, transparent 50%)',
-        pointerEvents: 'none',
-      }} />
+        position: 'relative', zIndex: 1,
+        maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
+        display: 'grid',
+        gridTemplateColumns: '44% 56%',
+        minHeight: '660px',
+      }}>
 
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <div />
+
+        {/* Right — form content */}
         <div style={{
-          display: 'grid', gridTemplateColumns: '1fr 1.2fr',
-          gap: '60px', alignItems: 'center',
-          minHeight: '500px',
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          padding: '72px 0 72px 40px',
         }}>
-          {/* Left: Photo */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', height: '100%' }}>
+          <h2 style={{
+            fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 700,
+            color: '#fff', lineHeight: 1.3, marginBottom: '14px',
+          }}>
+            Свяжитесь с нами для{' '}
+            <span style={{ color: '#6ea8de' }}>первой бесплатной</span>{' '}
+            консультации
+          </h2>
+
+          <div style={{
+            width: '72px', height: '2px',
+            background: 'linear-gradient(to right, #6ea8de, transparent)',
+            marginBottom: '18px',
+          }} />
+
+          <p style={{
+            color: 'rgba(255,255,255,0.65)',
+            fontSize: '1rem', lineHeight: 1.65, marginBottom: '28px',
+          }}>
+            Оставьте данные и мы свяжемся с вами в ближайшее время
+          </p>
+
+          {sent ? (
             <div style={{
-              width: '100%', maxWidth: '380px',
-              height: '460px',
-              position: 'relative',
+              padding: '22px 24px',
+              background: 'rgba(110,168,222,0.15)',
+              borderRadius: '12px',
+              border: '1px solid rgba(110,168,222,0.3)',
+              color: '#6ea8de', fontWeight: 600, fontSize: '1.05rem',
             }}>
-              <img
-                src="/photo-dorit-contact.png"
-                alt="Дорит Гитерман"
-                style={{
-                  width: '100%', height: '100%', objectFit: 'cover',
-                  objectPosition: 'top center', borderRadius: '16px 16px 0 0',
-                }}
-                onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }}
-              />
-              <div style={{
-                display: 'none', width: '100%', height: '100%',
-                alignItems: 'center', justifyContent: 'center',
-                flexDirection: 'column', gap: '8px',
-                color: 'rgba(255,255,255,0.2)', fontSize: '0.9rem',
-              }}>
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(110,168,222,0.25)" strokeWidth="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-                Фото
-              </div>
+              ✓ Спасибо! Мы свяжемся с вами в ближайшее время.
             </div>
-          </div>
-
-          {/* Right: Form */}
-          <div style={{ paddingBottom: '60px' }}>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, color: '#fff', lineHeight: 1.3, marginBottom: '12px' }}>
-              Свяжитесь с нами для{' '}
-              <span style={{ color: '#6ea8de' }}>первой бесплатной</span>{' '}
-              консультации
-            </h2>
-
-            <div style={{ width: '100%', height: '2px', background: 'linear-gradient(to right, #6ea8de, transparent)', marginBottom: '18px' }} />
-
-            <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '28px', fontSize: '1rem' }}>
-              Оставьте данные и мы свяжемся с вами в ближайшее время
-            </p>
-
-            {sent ? (
-              <div style={{
-                padding: '24px', background: 'rgba(110,168,222,0.15)',
-                borderRadius: '12px', border: '1px solid rgba(110,168,222,0.3)',
-                color: '#6ea8de', fontWeight: 600, fontSize: '1.05rem',
-              }}>
-                ✓ Спасибо! Мы свяжемся с вами в ближайшее время.
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <input
-                  className="form-input-dark"
-                  type="text"
-                  placeholder="Полное имя *"
-                  value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })}
-                  required
-                />
-                <input
-                  className="form-input-dark"
-                  type="tel"
-                  placeholder="Телефон *"
-                  value={form.phone}
-                  onChange={e => setForm({ ...form, phone: e.target.value })}
-                  required
-                />
-                <button type="submit" className="btn-submit">
-                  Отправить
-                </button>
-              </form>
-            )}
-          </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              style={{ display: 'flex', flexDirection: 'column', gap: '14px', maxWidth: '460px' }}
+            >
+              <input className="form-input-dark" type="text" placeholder="Полное имя *"
+                value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
+              <input className="form-input-dark" type="tel" placeholder="Телефон *"
+                value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} required />
+              <button type="submit" className="btn-submit" disabled={submitting}>
+                {submitting ? '...' : 'Отправить'}
+              </button>
+              {submitError && (
+                <p style={{ color: '#ff6b6b', fontSize: '0.85rem', marginTop: '4px' }}>{submitError}</p>
+              )}
+            </form>
+          )}
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 820px) {
-          #contact .container > div { grid-template-columns: 1fr !important; gap: 32px !important; }
-          #contact .container > div > div:first-child { display: none; }
+        @media (max-width: 768px) {
+          #contact > div { grid-template-columns: 1fr !important; min-height: auto !important; }
+          #contact > div > div:first-child { display: none; }
+          #contact > div > div:last-child { padding: 60px 0 !important; }
+          #contact::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(5, 14, 34, 0.60);
+            z-index: 0;
+            pointer-events: none;
+          }
         }
       `}</style>
     </section>

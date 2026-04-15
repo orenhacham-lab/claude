@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const NAV_LINKS = [
-  { label: 'Отзывы', href: '#reviews' },
   { label: 'Практика', href: '#services' },
   { label: 'О нас', href: '#about' },
   { label: 'В СМИ', href: '#media' },
   { label: 'Вопросы и ответы', href: '#faq' },
+  { label: 'Отзывы', href: '#reviews' },
   { label: 'Контакт', href: '#contact' },
 ]
 
@@ -51,6 +52,7 @@ function CloseIcon() {
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -60,8 +62,12 @@ export default function Navbar() {
 
   const handleNavClick = (href) => {
     setMenuOpen(false)
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    if (location.pathname === '/') {
+      const el = document.querySelector(href)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      window.location.href = '/' + href
+    }
   }
 
   return (
@@ -78,7 +84,7 @@ export default function Navbar() {
       }}>
 
         {/* Logo */}
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '11px', flexShrink: 0, textDecoration: 'none' }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '11px', flexShrink: 0, textDecoration: 'none' }}>
           <ScalesIcon />
           <div style={{ lineHeight: 1 }}>
             <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '3px' }}>Дорит Гитерман</div>
