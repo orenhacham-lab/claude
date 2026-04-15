@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 const VIDEOS = [
   { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7405253878549187847', title: 'Советы адвоката по уголовным делам' },
   { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7481233802313026823', title: 'Права при задержании: что нужно знать' },
-  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7406197391155662098', title: 'Юридическая защита: ваши права и возможности' },
+  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7406197391155662098', title: 'Юридическая защита: ваши права и возможности', thumbPosition: 'center top' },
 ]
 
 function getYtThumb(id) {
@@ -95,7 +95,7 @@ function VideoCard({ video, onYouTubeClick }) {
         <img
           src={tikThumb}
           alt={video.title}
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: video.thumbPosition || 'center center' }}
         />
       ) : (
         <div style={{
