@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 
 const VIDEOS = [
-  { type: 'youtube', id: 'e3D4BwGsAi8',  title: 'Уголовное право: стратегия защиты и опыт адвоката' },
+  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7405253878549187847', title: 'Советы адвоката по уголовным делам' },
   { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7481233802313026823', title: 'Права при задержании: что нужно знать' },
-  { type: 'youtube', id: 'kbL5SORQa-U',  title: 'Насилие в семье: юридическая защита и ваши права' },
+  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7406197391155662098', title: 'Юридическая защита: ваши права и возможности' },
 ]
 
 function getYtThumb(id) {
