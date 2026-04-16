@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 function InstagramIcon() {
   return (
@@ -19,6 +19,11 @@ function FacebookIcon() {
 }
 
 export default function Footer() {
+  const location = useLocation()
+  const he = location.pathname.startsWith('/he')
+  const privacyPath = he ? '/he/privacy' : '/privacy'
+  const accessibilityPath = he ? '/he/accessibility' : '/accessibility'
+
   return (
     <footer style={{
       background: '#070e1a',
@@ -29,17 +34,17 @@ export default function Footer() {
         display: 'flex', justifyContent: 'center', gap: '24px',
         padding: '10px 28px 0', flexWrap: 'wrap',
       }}>
-        <Link to="/privacy" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', transition: 'color .2s' }}
+        <Link to={privacyPath} style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', transition: 'color .2s' }}
           onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
           onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
         >
-          Политика конфиденциальности
+          {he ? 'מדיניות פרטיות' : 'Политика конфиденциальности'}
         </Link>
-        <Link to="/accessibility" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', transition: 'color .2s' }}
+        <Link to={accessibilityPath} style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', transition: 'color .2s' }}
           onMouseEnter={e => e.currentTarget.style.color = '#6ea8de'}
           onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
         >
-          Декларация доступности
+          {he ? 'הצהרת נגישות' : 'Декларация доступности'}
         </Link>
       </div>
 
@@ -84,7 +89,7 @@ export default function Footer() {
         {/* Copyright + credit */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
           <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}>
-            © 2026 Дорит Гитерман — Адвокат
+            {he ? '© 2026 דורית גיטרמן — עורכת דין' : '© 2026 Дорит Гитерман — Адвокат'}
           </div>
           <div style={{ color: '#fff', fontSize: '0.72rem' }}>
             Web Design by{' '}

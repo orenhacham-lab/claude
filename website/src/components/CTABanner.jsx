@@ -1,4 +1,6 @@
-export default function CTABanner() {
+export default function CTABanner({ lang = 'ru' }) {
+  const he = lang === 'he'
+
   return (
     <section id="cta-banner" style={{ background: 'var(--light-bg)', padding: '60px 0' }}>
       <div className="container">
@@ -15,12 +17,18 @@ export default function CTABanner() {
             display: 'flex', flexDirection: 'column', justifyContent: 'center',
           }}>
             <h2 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontWeight: 700, color: '#fff', lineHeight: 1.35, marginBottom: '20px' }}>
-              Когда уголовный процесс сложен, <br />вам нужен адвокат, который знает{' '}
-              <span style={{ color: '#6ea8de' }}>систему изнутри.</span>
+              {he ? (
+                <>כשההליך הפלילי מורכב, אתם צריכים עורך דין שמכיר{' '}<span style={{ color: '#6ea8de' }}>את המערכת מבפנים.</span></>
+              ) : (
+                <>Когда уголовный процесс сложен, <br />вам нужен адвокат, который знает{' '}<span style={{ color: '#6ea8de' }}>систему изнутри.</span></>
+              )}
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.97rem', lineHeight: 1.7, marginBottom: '32px' }}>
-              Многолетнее выступление в судах.<br />
-              Ответственное, точное и бескомпромиссное представление.
+              {he ? (
+                <>שנים של הופעות בבתי משפט.<br />ייצוג אחראי, מדויק ובלתי מתפשר.</>
+              ) : (
+                <>Многолетнее выступление в судах.<br />Ответственное, точное и бескомпромиссное представление.</>
+              )}
             </p>
             <a
               href="#contact"
@@ -28,7 +36,7 @@ export default function CTABanner() {
               className="btn-outline cta-btn"
               style={{ alignSelf: 'flex-start' }}
             >
-              Бесплатная консультация →
+              {he ? 'ייעוץ ראשוני חינם →' : 'Бесплатная консультация →'}
             </a>
           </div>
 
@@ -40,7 +48,7 @@ export default function CTABanner() {
           }}>
             <img
               src="/photo-dorit-cta.png"
-              alt="Дорит Гитерман"
+              alt={he ? 'דורית גיטרמן' : 'Дорит Гитерман'}
               style={{
                 display: 'block',
                 width: '100%',

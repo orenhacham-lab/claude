@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 
-const NAV_LINKS = [
+const NAV_LINKS_RU = [
   { label: 'Практика', href: '#services' },
   { label: 'О нас', href: '#about' },
   { label: 'В СМИ', href: '#media' },
   { label: 'Вопросы и ответы', href: '#faq' },
   { label: 'Отзывы', href: '#reviews' },
   { label: 'Контакт', href: '#contact' },
+]
+
+const NAV_LINKS_HE = [
+  { label: 'תחומי פעילות', href: '#services' },
+  { label: 'אודות', href: '#about' },
+  { label: 'בתקשורת', href: '#media' },
+  { label: 'שאלות ותשובות', href: '#faq' },
+  { label: 'המלצות', href: '#reviews' },
+  { label: 'צור קשר', href: '#contact' },
 ]
 
 function ScalesIcon() {
@@ -53,6 +62,8 @@ export default function Navbar({ lang = 'ru' }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+  const he = lang === 'he'
+  const NAV_LINKS = he ? NAV_LINKS_HE : NAV_LINKS_RU
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -87,8 +98,12 @@ export default function Navbar({ lang = 'ru' }) {
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '11px', flexShrink: 0, textDecoration: 'none' }}>
           <ScalesIcon />
           <div style={{ lineHeight: 1 }}>
-            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '3px' }}>Дорит Гитерман</div>
-            <div style={{ fontSize: '0.7rem', color: '#6ea8de', fontWeight: 400 }}>Адвокат по уголовным делам</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '3px' }}>
+              {he ? 'דורית גיטרמן' : 'Дорит Гитерман'}
+            </div>
+            <div style={{ fontSize: '0.7rem', color: '#6ea8de', fontWeight: 400 }}>
+              {he ? 'עורכת דין פלילית' : 'Адвокат по уголовным делам'}
+            </div>
           </div>
         </a>
 
@@ -115,7 +130,7 @@ export default function Navbar({ lang = 'ru' }) {
           ))}
         </ul>
 
-        {/* Phone + CTA */}
+        {/* Phone + CTA + Lang switcher */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
           <a href="tel:054-2002707" style={{
             display: 'flex', alignItems: 'center', gap: '6px',
@@ -130,28 +145,28 @@ export default function Navbar({ lang = 'ru' }) {
             className="btn-outline"
             style={{ fontSize: '0.82rem', padding: '9px 18px', whiteSpace: 'nowrap' }}
           >
-            Консультация
+            {he ? 'ייעוץ' : 'Консультация'}
           </a>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
             <Link to="/" style={{
-              fontSize: '0.78rem', fontWeight: lang === 'ru' ? 700 : 400, textDecoration: 'none',
-              color: lang === 'ru' ? '#6ea8de' : 'rgba(255,255,255,0.45)',
+              fontSize: '0.78rem', fontWeight: !he ? 700 : 400, textDecoration: 'none',
+              color: !he ? '#6ea8de' : 'rgba(255,255,255,0.45)',
               padding: '4px 6px',
-              borderBottom: lang === 'ru' ? '1px solid #6ea8de' : '1px solid transparent',
+              borderBottom: !he ? '1px solid #6ea8de' : '1px solid transparent',
             }}>RU</Link>
             <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem' }}>|</span>
             <Link to="/he" style={{
-              fontSize: '0.78rem', fontWeight: lang === 'he' ? 700 : 400, textDecoration: 'none',
-              color: lang === 'he' ? '#6ea8de' : 'rgba(255,255,255,0.45)',
+              fontSize: '0.78rem', fontWeight: he ? 700 : 400, textDecoration: 'none',
+              color: he ? '#6ea8de' : 'rgba(255,255,255,0.45)',
               padding: '4px 6px',
-              borderBottom: lang === 'he' ? '1px solid #6ea8de' : '1px solid transparent',
+              borderBottom: he ? '1px solid #6ea8de' : '1px solid transparent',
             }}>HE</Link>
           </div>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             style={{ color: '#fff', display: 'none', background: 'none', border: 'none', cursor: 'pointer' }}
             className="hamburger"
-            aria-label="Меню"
+            aria-label={he ? 'תפריט' : 'Меню'}
           >
             {menuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>

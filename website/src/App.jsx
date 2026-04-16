@@ -24,14 +24,14 @@ function Home({ lang = 'ru' }) {
     <>
       <Navbar lang={lang} />
       <main>
-        <Hero />
-        <Services />
-        <About />
-        <CTABanner />
-        <Media />
-        <FAQ />
-        <Reviews />
-        <Contact />
+        <Hero lang={lang} />
+        <Services lang={lang} />
+        <About lang={lang} />
+        <CTABanner lang={lang} />
+        <Media lang={lang} />
+        <FAQ lang={lang} />
+        <Reviews lang={lang} />
+        <Contact lang={lang} />
       </main>
       <Footer />
     </>
@@ -46,7 +46,9 @@ function App() {
         <Route path="/" element={<Home lang="ru" />} />
         <Route path="/he" element={<Home lang="he" />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/he/privacy" element={<Privacy lang="he" />} />
         <Route path="/accessibility" element={<Accessibility />} />
+        <Route path="/he/accessibility" element={<Accessibility lang="he" />} />
       </Routes>
     </BrowserRouter>
   )

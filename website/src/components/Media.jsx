@@ -1,9 +1,25 @@
 import { useState, useEffect } from 'react'
 
 const VIDEOS = [
-  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7405253878549187847', title: 'Советы адвоката по уголовным делам' },
-  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7481233802313026823', title: 'Права при задержании: что нужно знать' },
-  { type: 'tiktok',  url: 'https://www.tiktok.com/@dorit_gitterman/video/7406197391155662098', title: 'Юридическая защита: ваши права и возможности', staticThumb: '/thumb-video3.jpg' },
+  {
+    type: 'tiktok',
+    url: 'https://www.tiktok.com/@dorit_gitterman/video/7405253878549187847',
+    title: 'Советы адвоката по уголовным делам',
+    titleHe: 'עצות מעורכת דין פלילית',
+  },
+  {
+    type: 'tiktok',
+    url: 'https://www.tiktok.com/@dorit_gitterman/video/7481233802313026823',
+    title: 'Права при задержании: что нужно знать',
+    titleHe: 'זכויות במעצר: מה צריך לדעת',
+  },
+  {
+    type: 'tiktok',
+    url: 'https://www.tiktok.com/@dorit_gitterman/video/7406197391155662098',
+    title: 'Юридическая защита: ваши права и возможности',
+    titleHe: 'הגנה משפטית: הזכויות והאפשרויות שלכם',
+    staticThumb: '/thumb-video3.jpg',
+  },
 ]
 
 function getYtThumb(id) {
@@ -53,10 +69,11 @@ function VideoModal({ videoId, title, onClose }) {
   )
 }
 
-function VideoCard({ video, onYouTubeClick }) {
+function VideoCard({ video, onYouTubeClick, lang }) {
   const [hovered, setHovered] = useState(false)
   const [tikThumb, setTikThumb] = useState(null)
   const isYT = video.type === 'youtube'
+  const displayTitle = lang === 'he' ? video.titleHe : video.title
 
   useEffect(() => {
     if (video.type === 'tiktok' && !video.staticThumb) {
@@ -88,13 +105,13 @@ function VideoCard({ video, onYouTubeClick }) {
       {isYT ? (
         <img
           src={getYtThumb(video.id)}
-          alt={video.title}
+          alt={displayTitle}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         />
       ) : (video.staticThumb || tikThumb) ? (
         <img
           src={video.staticThumb || tikThumb}
-          alt={video.title}
+          alt={displayTitle}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: video.thumbPosition || 'center center' }}
         />
       ) : (
@@ -109,7 +126,7 @@ function VideoCard({ video, onYouTubeClick }) {
         </div>
       )}
 
-      {/* Hover overlay — ONLY on hover */}
+      {/* Hover overlay */}
       {hovered && (
         <div style={{
           position: 'absolute', inset: 0,
@@ -117,7 +134,7 @@ function VideoCard({ video, onYouTubeClick }) {
         }} />
       )}
 
-      {/* Play button — white circle, dark triangle, centered exactly */}
+      {/* Play button */}
       <div style={{
         position: 'absolute', inset: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -136,7 +153,7 @@ function VideoCard({ video, onYouTubeClick }) {
         </div>
       </div>
 
-      {/* Bottom strip — semi-transparent black, ~48px, text left-aligned */}
+      {/* Bottom strip */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0,
         height: '48px',
@@ -154,7 +171,7 @@ function VideoCard({ video, onYouTubeClick }) {
           overflow: 'hidden',
           textOverflow: 'ellipsis',
         }}>
-          {video.title}
+          {displayTitle}
         </p>
       </div>
     </div>
@@ -163,9 +180,10 @@ function VideoCard({ video, onYouTubeClick }) {
 
 const PER_PAGE = 3
 
-export default function Media() {
+export default function Media({ lang = 'ru' }) {
   const [page, setPage] = useState(0)
   const [modal, setModal] = useState(null)
+  const he = lang === 'he'
 
   const pages = []
   for (let i = 0; i < VIDEOS.length; i += PER_PAGE) pages.push(VIDEOS.slice(i, i + PER_PAGE))
@@ -181,14 +199,14 @@ export default function Media() {
             <div className="title-deco-line" />
             <span className="title-deco-arrow">→</span>
           </div>
-          <h2>В СМИ</h2>
+          <h2>{he ? 'בתקשורת' : 'В СМИ'}</h2>
           <div className="title-deco">
             <span className="title-deco-arrow">←</span>
             <div className="title-deco-line" />
           </div>
         </div>
 
-        {/* Cards grid — exactly 3 per row */}
+        {/* Cards grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: current.length === PER_PAGE ? 'repeat(3, 1fr)' : `repeat(${current.length}, 1fr)`,
@@ -200,7 +218,8 @@ export default function Media() {
             <VideoCard
               key={`${page}-${i}`}
               video={video}
-              onYouTubeClick={() => setModal({ videoId: video.id, title: video.title })}
+              lang={lang}
+              onYouTubeClick={() => setModal({ videoId: video.id, title: lang === 'he' ? video.titleHe : video.title })}
             />
           ))}
         </div>
@@ -213,7 +232,7 @@ export default function Media() {
                 key={i}
                 className={`dot${i === page ? ' active' : ''}`}
                 onClick={() => setPage(i)}
-                aria-label={`Страница ${i + 1}`}
+                aria-label={he ? `עמוד ${i + 1}` : `Страница ${i + 1}`}
               />
             ))}
           </div>

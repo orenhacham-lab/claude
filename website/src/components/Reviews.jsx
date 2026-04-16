@@ -15,7 +15,7 @@ function Stars() {
   return <span style={{ color: '#FBBC05', fontSize: '1.1rem', letterSpacing: '2px' }}>★★★★★</span>
 }
 
-const REVIEWS_PAGES = [
+const REVIEWS_PAGES_RU = [
   [
     {
       text: 'Самый профессиональный адвокат, которого я когда-либо встречал. Она добилась наилучшего возможного результата. После получения вознаграждения — поразительный опыт.',
@@ -58,8 +58,53 @@ const REVIEWS_PAGES = [
   ],
 ]
 
-export default function Reviews() {
+const REVIEWS_PAGES_HE = [
+  [
+    {
+      text: 'עורכת הדין המקצועית ביותר שנפגשתי איתה. היא השיגה את התוצאה הטובה ביותר האפשרית. חוויה מדהימה.',
+      name: 'יונה קט',
+      time: 'לפני 9 חודשים',
+      color: '#8b5cf6',
+    },
+    {
+      text: 'קודם כל, אני רוצה להודות לעורכת הדין על הכבוד, הנימוס והנגישות. זה ברור לא סתם עבודה — עבודה מדהימה. מקצועיות ברמה הגבוהה ביותר. תודה על כל שעה, על המענה לכל השאלות.',
+      name: 'אוריאל טוב',
+      time: 'לפני 7 חודשים',
+      color: '#ef4444',
+    },
+    {
+      text: 'קיבלתי שירות מעולה — נעים ומקצועי. טיפלה בענייניי בשלוות נפש, הייתה מוכשרת ורגישה במיוחד. ממליץ!',
+      name: 'נדב ו.',
+      time: 'לפני חודש',
+      color: '#22c55e',
+    },
+  ],
+  [
+    {
+      text: 'דורית היא מקצוענית אמיתית. היא ניהלה את התיק שלי במקסימום אחריות ומסירות מלאה. התוצאה עברה את כל הציפיות.',
+      name: 'אלכסנדר מ.',
+      time: 'לפני 3 חודשים',
+      color: '#3b82f6',
+    },
+    {
+      text: 'ממליץ מאוד! הסבירה הכל בצורה ברורה ומובנת. הרגשתי תמיכה אמיתית בכל שלב.',
+      name: 'מרינה ל.',
+      time: 'לפני 5 חודשים',
+      color: '#f97316',
+    },
+    {
+      text: 'פניתי במצב קשה. דורית הגיבה מיידית, הבינה את התיק והשיגה את סגירת ההליך הפלילי.',
+      name: 'רומן ק.',
+      time: 'לפני 2 חודשים',
+      color: '#14b8a6',
+    },
+  ],
+]
+
+export default function Reviews({ lang = 'ru' }) {
   const [page, setPage] = useState(0)
+  const he = lang === 'he'
+  const REVIEWS_PAGES = he ? REVIEWS_PAGES_HE : REVIEWS_PAGES_RU
 
   return (
     <section id="reviews" style={{ background: 'var(--dark)', padding: '80px 0' }}>
@@ -69,7 +114,7 @@ export default function Reviews() {
             <div className="title-deco-line" />
             <span className="title-deco-arrow">→</span>
           </div>
-          <h2>Отзывы</h2>
+          <h2>{he ? 'המלצות' : 'Отзывы'}</h2>
           <div className="title-deco">
             <span className="title-deco-arrow">←</span>
             <div className="title-deco-line" />
@@ -112,7 +157,7 @@ export default function Reviews() {
 
         <div className="pagination-dots">
           {REVIEWS_PAGES.map((_, i) => (
-            <button key={i} className={`dot${i === page ? ' active' : ''}`} onClick={() => setPage(i)} aria-label={`Страница ${i + 1}`} />
+            <button key={i} className={`dot${i === page ? ' active' : ''}`} onClick={() => setPage(i)} aria-label={he ? `עמוד ${i + 1}` : `Страница ${i + 1}`} />
           ))}
         </div>
       </div>

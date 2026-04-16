@@ -31,17 +31,25 @@ function ScalesIcon() {
   )
 }
 
-const FEATURES = [
+const FEATURES_RU = [
   { icon: <ClockIcon />, line1: 'Доступность 24/7', line2: 'в экстренных ситуациях' },
   { icon: <GlobeIcon />, line1: 'Консультации на', line2: 'иврите, рус., англ.' },
   { icon: <ScalesIcon />, line1: '25 лет опыта', line2: 'в уголовном праве' },
 ]
 
-export default function Hero() {
+const FEATURES_HE = [
+  { icon: <ClockIcon />, line1: 'זמינות 24/7', line2: 'במצבי חירום' },
+  { icon: <GlobeIcon />, line1: 'ייעוץ ב', line2: 'עברית, רוסית, אנגלית' },
+  { icon: <ScalesIcon />, line1: '25 שנות ניסיון', line2: 'בדיני עונשין' },
+]
+
+export default function Hero({ lang = 'ru' }) {
   const [form, setForm] = useState({ name: '', phone: '' })
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState(null)
+  const he = lang === 'he'
+  const FEATURES = he ? FEATURES_HE : FEATURES_RU
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -49,7 +57,10 @@ export default function Hero() {
     setSubmitError(null)
     const { error } = await submitLead({ full_name: form.name, phone: form.phone, form_source: 'hero' })
     setSubmitting(false)
-    if (error) { setSubmitError('Ошибка отправки. Попробуйте позже.'); return }
+    if (error) {
+      setSubmitError(he ? 'שגיאה בשליחה. נסה שוב מאוחר יותר.' : 'Ошибка отправки. Попробуйте позже.')
+      return
+    }
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({ event: 'form_submit_success', full_name: form.name, phone: form.phone, form_source: 'hero' })
     setSent(true)
@@ -85,15 +96,18 @@ export default function Hero() {
             fontSize: 'clamp(2rem, 4vw, 3.6rem)', fontWeight: 900,
             color: '#fff', lineHeight: 1.05, marginBottom: '12px',
           }}>
-            Дорит Гитерман
+            {he ? 'דורית גיטרמן' : 'Дорит Гитерман'}
           </h1>
 
           <h2 style={{
             fontSize: 'clamp(1.2rem, 2.4vw, 2rem)', fontWeight: 700,
             color: '#6ea8de', lineHeight: 1.25, marginBottom: '16px',
           }}>
-            Адвокат по уголовным делам<br />
-            и делам о насилии в семье
+            {he ? (
+              <>עורכת דין לדיני עונשין<br />ואלימות במשפחה</>
+            ) : (
+              <>Адвокат по уголовным делам<br />и делам о насилии в семье</>
+            )}
           </h2>
 
           <div style={{
@@ -107,8 +121,11 @@ export default function Hero() {
             fontSize: 'clamp(0.88rem, 1.2vw, 0.98rem)',
             lineHeight: 1.75, marginBottom: '24px',
           }}>
-            Уголовное право требует глубокого опыта и понимания системы.<br />
-            25 лет практики и прецедентных дел — в моменты, когда нет места ошибкам.
+            {he ? (
+              <>הדין הפלילי דורש ניסיון עמוק והבנת המערכת.<br />25 שנות פרקטיקה ותקדימים — ברגעים שאין בהם מקום לטעויות.</>
+            ) : (
+              <>Уголовное право требует глубокого опыта и понимания системы.<br />25 лет практики и прецедентных дел — в моменты, когда нет места ошибкам.</>
+            )}
           </p>
 
           {/* Feature cards */}
@@ -130,24 +147,27 @@ export default function Hero() {
           {/* Lead form */}
           {sent ? (
             <div style={{ color: '#6ea8de', fontWeight: 600 }}>
-              ✓ Спасибо! Мы свяжемся с вами в ближайшее время.
+              {he ? '✓ תודה! נחזור אליך בהקדם.' : '✓ Спасибо! Мы свяжемся с вами в ближайшее время.'}
             </div>
           ) : (
             <>
               <p style={{ color: 'rgba(255,255,255,0.62)', marginBottom: '12px', fontSize: '0.88rem' }}>
-                Хотите бесплатную консультацию?{' '}
-                <span style={{ color: '#6ea8de', fontWeight: 500 }}>Оставьте данные, мы перезвоним</span>
+                {he ? (
+                  <>רוצה ייעוץ ראשוני חינם?{' '}<span style={{ color: '#6ea8de', fontWeight: 500 }}>השאר פרטים, נחזור אליך</span></>
+                ) : (
+                  <>Хотите бесплатную консультацию?{' '}<span style={{ color: '#6ea8de', fontWeight: 500 }}>Оставьте данные, мы перезвоним</span></>
+                )}
               </p>
               <form className="hero-form" onSubmit={handleSubmit}
                 style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <input className="form-input" type="text" placeholder="Полное имя *"
+                <input className="form-input" type="text" placeholder={he ? 'שם מלא *' : 'Полное имя *'}
                   value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
                   required style={{ flex: '1 1 140px' }} />
-                <input className="form-input" type="tel" placeholder="Телефон *"
+                <input className="form-input" type="tel" placeholder={he ? 'טלפון *' : 'Телефон *'}
                   value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
                   required style={{ flex: '1 1 120px' }} />
                 <button type="submit" className="btn-primary" style={{ whiteSpace: 'nowrap' }} disabled={submitting}>
-                  {submitting ? '...' : 'Отправить'}
+                  {submitting ? '...' : (he ? 'שליחה' : 'Отправить')}
                 </button>
               </form>
               {submitError && (
