@@ -37,7 +37,7 @@ export default function CTABanner({ lang = 'ru' }) {
               className="btn-outline cta-btn"
               style={{ alignSelf: 'flex-start' }}
             >
-              {he ? 'ייעוץ ראשוני חינם →' : 'Бесплатная консультация →'}
+              {he ? '← ייעוץ ראשוני חינם' : 'Бесплатная консультация →'}
             </a>
           </div>
 

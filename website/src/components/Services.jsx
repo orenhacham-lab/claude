@@ -83,7 +83,7 @@ const SERVICES_HE = [
     desc: 'ניהול תיק פלילי במצבים רגילים ודחופים: בהתחשב בבסיס הראיות, אפשרויות ההסדר, הגנה ושמירה על האינטרסים של הלקוח.',
   },
   {
-    title: 'איומים והפחדה',
+    title: 'עבירות איומים',
     desc: 'ניהול משא ומתן, סיוע בהסדרים — עבודה עם כתבי אישום פליליים במטרה להגן על הלקוח מעונש ולשמור על עתידו הנקי.',
   },
 ]
@@ -100,7 +100,7 @@ export default function Services({ lang = 'ru' }) {
             <div className="title-deco-line" />
             <span className="title-deco-arrow">→</span>
           </div>
-          <h2>{he ? 'תחומי פעילות' : 'Области практики'}</h2>
+          <h2>{he ? 'תחומי התמחות' : 'Области практики'}</h2>
           <div className="title-deco">
             <span className="title-deco-arrow">←</span>
             <div className="title-deco-line" />

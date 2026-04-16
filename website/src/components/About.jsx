@@ -38,7 +38,7 @@ export default function About({ lang = 'ru' }) {
             fontWeight: 700, color: '#fff', lineHeight: 1.2,
           }}>
             {he ? (
-              <>על עורכת הדין{' '}<span style={{ color: '#6ea8de' }}>דורית גיטרמן</span></>
+              <>אודות עורכת הדין{' '}<span style={{ color: '#6ea8de' }}>דורית גיטרמן</span></>
             ) : (
               <>Об адвокате{' '}<span style={{ color: '#6ea8de' }}>Дорит Гитерман</span></>
             )}
@@ -94,7 +94,7 @@ export default function About({ lang = 'ru' }) {
               className="btn-outline about-cta-btn"
               style={{ fontSize: '0.95rem', padding: '13px 30px' }}
             >
-              {he ? 'ייעוץ ראשוני חינם →' : 'Бесплатная консультация →'}
+              {he ? '← ייעוץ ראשוני חינם' : 'Бесплатная консультация →'}
             </a>
           </div>
 
