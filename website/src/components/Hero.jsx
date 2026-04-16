@@ -39,7 +39,7 @@ const FEATURES_RU = [
 
 const FEATURES_HE = [
   { icon: <ClockIcon />, line1: 'זמינות 24/7', line2: 'במצבי חירום' },
-  { icon: <GlobeIcon />, line1: 'ייעוץ ב', line2: 'עברית, רוסית, אנגלית' },
+  { icon: <GlobeIcon />, line1: 'ייצוג ב', line2: 'רוסית, עברית ואנגלית' },
   { icon: <ScalesIcon />, line1: '25 שנות ניסיון', line2: 'בדיני עונשין' },
 ]
 
@@ -156,7 +156,7 @@ export default function Hero({ lang = 'ru' }) {
             <>
               <p style={{ color: 'rgba(255,255,255,0.62)', marginBottom: '12px', fontSize: '0.88rem' }}>
                 {he ? (
-                  <>רוצה ייעוץ ראשוני חינם?{' '}<span style={{ color: '#6ea8de', fontWeight: 500 }}>השאר פרטים, נחזור אליך</span></>
+                  <>מעוניינים בשיחת ייעוץ חינם?{' '}<span style={{ color: '#6ea8de', fontWeight: 500 }}>השאירו פרטים ונחזור אליכם</span></>
                 ) : (
                   <>Хотите бесплатную консультацию?{' '}<span style={{ color: '#6ea8de', fontWeight: 500 }}>Оставьте данные, мы перезвоним</span></>
                 )}
