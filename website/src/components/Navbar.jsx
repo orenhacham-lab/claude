@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 const NAV_LINKS = [
   { label: 'Практика', href: '#services' },
@@ -49,7 +49,7 @@ function CloseIcon() {
   )
 }
 
-export default function Navbar() {
+export default function Navbar({ lang = 'ru' }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
@@ -62,7 +62,7 @@ export default function Navbar() {
 
   const handleNavClick = (href) => {
     setMenuOpen(false)
-    if (location.pathname === '/') {
+    if (location.pathname === '/' || location.pathname === '/he') {
       const el = document.querySelector(href)
       if (el) el.scrollIntoView({ behavior: 'smooth' })
     } else {
@@ -132,6 +132,21 @@ export default function Navbar() {
           >
             Консультация
           </a>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+            <Link to="/" style={{
+              fontSize: '0.78rem', fontWeight: lang === 'ru' ? 700 : 400, textDecoration: 'none',
+              color: lang === 'ru' ? '#6ea8de' : 'rgba(255,255,255,0.45)',
+              padding: '4px 6px',
+              borderBottom: lang === 'ru' ? '1px solid #6ea8de' : '1px solid transparent',
+            }}>RU</Link>
+            <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem' }}>|</span>
+            <Link to="/he" style={{
+              fontSize: '0.78rem', fontWeight: lang === 'he' ? 700 : 400, textDecoration: 'none',
+              color: lang === 'he' ? '#6ea8de' : 'rgba(255,255,255,0.45)',
+              padding: '4px 6px',
+              borderBottom: lang === 'he' ? '1px solid #6ea8de' : '1px solid transparent',
+            }}>HE</Link>
+          </div>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             style={{ color: '#fff', display: 'none', background: 'none', border: 'none', cursor: 'pointer' }}

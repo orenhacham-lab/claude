@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -13,10 +14,15 @@ import CookieBanner from './components/CookieBanner'
 import Privacy from './pages/Privacy'
 import Accessibility from './pages/Accessibility'
 
-function Home() {
+function Home({ lang = 'ru' }) {
+  useEffect(() => {
+    document.documentElement.lang = lang
+    document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr'
+  }, [lang])
+
   return (
     <>
-      <Navbar />
+      <Navbar lang={lang} />
       <main>
         <Hero />
         <Services />
@@ -37,7 +43,8 @@ function App() {
     <BrowserRouter>
       <CookieBanner />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home lang="ru" />} />
+        <Route path="/he" element={<Home lang="he" />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/accessibility" element={<Accessibility />} />
       </Routes>
