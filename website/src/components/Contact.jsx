@@ -42,16 +42,18 @@ export default function Contact({ lang = 'ru' }) {
         position: 'relative', zIndex: 1,
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         display: 'grid',
-        gridTemplateColumns: '44% 56%',
+        gridTemplateColumns: he ? '56% 44%' : '44% 56%',
         minHeight: '660px',
       }}>
 
-        <div />
+        <div style={he ? { order: 2 } : {}} />
 
-        {/* Right — form content */}
+        {/* Form content */}
         <div style={{
           display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          padding: '72px 0 72px 40px',
+          padding: he ? '72px 40px 72px 0' : '72px 0 72px 40px',
+          order: he ? 1 : undefined,
+          textAlign: he ? 'right' : undefined,
         }}>
           <h2 style={{
             fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 700,

@@ -81,16 +81,19 @@ export default function Hero({ lang = 'ru' }) {
         maxWidth: '1240px', margin: '0 auto', padding: '0 28px',
         height: 'calc(100vh - 72px)',
         display: 'grid',
-        gridTemplateColumns: '42% 58%',
+        gridTemplateColumns: he ? '58% 42%' : '42% 58%',
       }}>
 
-        <div />
+        <div style={he ? { order: 2 } : {}} />
 
-        {/* Right cell — text content */}
+        {/* Text content */}
         <div style={{
           display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          paddingLeft: '40px',
+          paddingLeft: he ? '0' : '40px',
+          paddingRight: he ? '40px' : '0',
           maxWidth: '560px',
+          order: he ? 1 : undefined,
+          textAlign: he ? 'right' : undefined,
         }}>
           <h1 style={{
             fontSize: 'clamp(2rem, 4vw, 3.6rem)', fontWeight: 900,

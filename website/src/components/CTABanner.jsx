@@ -10,11 +10,12 @@ export default function CTABanner({ lang = 'ru' }) {
           boxShadow: '0 8px 40px rgba(0,0,0,0.15)',
           minHeight: '380px',
         }}>
-          {/* Left: Dark text */}
+          {/* Text panel */}
           <div style={{
             background: 'var(--dark)',
             padding: '52px 48px',
             display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            textAlign: he ? 'right' : undefined,
           }}>
             <h2 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontWeight: 700, color: '#fff', lineHeight: 1.35, marginBottom: '20px' }}>
               {he ? (
