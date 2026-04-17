@@ -97,7 +97,7 @@ export default function About({ lang = 'ru' }) {
               className="btn-outline about-cta-btn"
               style={{ fontSize: '0.95rem', padding: '13px 30px', ...(he ? { direction: 'ltr' } : {}) }}
             >
-              {he ? 'ייעוץ ראשוני חינם →' : 'Бесплатная консультация →'}
+              {he ? 'ייעוץ ראשוני חינם ←' : 'Бесплатная консультация →'}
             </a>
           </div>
 
