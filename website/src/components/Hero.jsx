@@ -165,10 +165,10 @@ export default function Hero({ lang = 'ru' }) {
                 style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <input className="form-input" type="text" placeholder={he ? 'שם מלא *' : 'Полное имя *'}
                   value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                  required style={{ flex: '1 1 140px' }} />
+                  required style={{ flex: '1 1 140px', ...(he ? { direction: 'rtl', textAlign: 'right' } : {}) }} />
                 <input className="form-input" type="tel" placeholder={he ? 'טלפון *' : 'Телефон *'}
                   value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
-                  required style={{ flex: '1 1 120px' }} />
+                  required style={{ flex: '1 1 120px', ...(he ? { direction: 'rtl', textAlign: 'right' } : {}) }} />
                 <button type="submit" className="btn-primary" style={{ whiteSpace: 'nowrap' }} disabled={submitting}>
                   {submitting ? '...' : (he ? 'שליחה' : 'Отправить')}
                 </button>

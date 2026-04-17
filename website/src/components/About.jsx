@@ -95,7 +95,7 @@ export default function About({ lang = 'ru' }) {
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
               className="btn-outline about-cta-btn"
-              style={{ fontSize: '0.95rem', padding: '13px 30px' }}
+              style={{ fontSize: '0.95rem', padding: '13px 30px', ...(he ? { direction: 'ltr' } : {}) }}
             >
               {he ? 'ייעוץ ראשוני חינם →' : 'Бесплатная консультация →'}
             </a>

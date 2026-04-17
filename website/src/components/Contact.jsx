@@ -95,9 +95,11 @@ export default function Contact({ lang = 'ru' }) {
               style={{ display: 'flex', flexDirection: 'column', gap: '14px', maxWidth: '460px' }}
             >
               <input className="form-input-dark" type="text" placeholder={he ? 'שם מלא *' : 'Полное имя *'}
-                value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
+                value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required
+                style={he ? { direction: 'rtl', textAlign: 'right' } : {}} />
               <input className="form-input-dark" type="tel" placeholder={he ? 'טלפון *' : 'Телефон *'}
-                value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} required />
+                value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} required
+                style={he ? { direction: 'rtl', textAlign: 'right' } : {}} />
               <button type="submit" className="btn-submit" disabled={submitting}>
                 {submitting ? '...' : (he ? 'שליחה' : 'Отправить')}
               </button>

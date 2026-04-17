@@ -35,7 +35,7 @@ export default function CTABanner({ lang = 'ru' }) {
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
               className="btn-outline cta-btn"
-              style={{ alignSelf: 'flex-start' }}
+              style={{ alignSelf: 'flex-start', ...(he ? { direction: 'ltr' } : {}) }}
             >
               {he ? 'ייעוץ ראשוני חינם →' : 'Бесплатная консультация →'}
             </a>
