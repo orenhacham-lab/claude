@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { submitLead } from '../lib/supabase'
+import { pushConversionEvent } from '../lib/analytics'
 
 export default function Contact({ lang = 'ru' }) {
   const [form, setForm] = useState({ name: '', phone: '' })
@@ -18,8 +19,7 @@ export default function Contact({ lang = 'ru' }) {
       setSubmitError(he ? 'שגיאה בשליחה. נסה שוב מאוחר יותר.' : 'Ошибка отправки. Попробуйте позже.')
       return
     }
-    window.dataLayer = window.dataLayer || []
-    window.dataLayer.push({ event: 'form_submit_success', full_name: form.name, phone: form.phone, form_source: 'contact' })
+    pushConversionEvent(form.name, form.phone, 'contact')
     setSent(true)
   }
 
