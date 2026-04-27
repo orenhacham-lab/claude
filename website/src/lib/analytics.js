@@ -7,9 +7,11 @@ function normalizePhone(phone) {
 
 export function pushConversionEvent(name, phone, form_source) {
   const parts = name.trim().split(/\s+/)
+  const transaction_id = `${form_source}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
   window.dataLayer = window.dataLayer || []
   window.dataLayer.push({
     event: 'form_submit_success',
+    transaction_id,
     user_data: {
       phone_number: normalizePhone(phone),
       address: {
