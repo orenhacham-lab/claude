@@ -132,7 +132,7 @@ export default function Navbar({ lang = 'ru' }) {
 
         {/* Phone + CTA + Lang switcher */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
-          <a href="tel:054-2002707" style={{
+          <a href="tel:054-2002707" className="nav-phone" style={{
             display: 'flex', alignItems: 'center', gap: '6px',
             color: 'rgba(255,255,255,0.8)', fontSize: 'calc(0.88rem + 4px)', fontWeight: 700, whiteSpace: 'nowrap',
           }}>
@@ -204,6 +204,7 @@ export default function Navbar({ lang = 'ru' }) {
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
           .phone-text { display: none; }
+          .nav-phone svg { width: 24px; height: 24px; }
         }
         @media (max-width: 600px) {
           .btn-outline { display: none !important; }
