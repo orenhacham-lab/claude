@@ -134,7 +134,7 @@ export default function Navbar({ lang = 'ru' }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
           <a href="tel:054-2002707" style={{
             display: 'flex', alignItems: 'center', gap: '6px',
-            color: 'rgba(255,255,255,0.8)', fontSize: '0.88rem', whiteSpace: 'nowrap',
+            color: 'rgba(255,255,255,0.8)', fontSize: 'calc(0.88rem + 4px)', fontWeight: 700, whiteSpace: 'nowrap',
           }}>
             <PhoneIcon />
             <span className="phone-text">054-2002707</span>

@@ -38,6 +38,11 @@ export async function submitLead({ full_name, phone, form_source }) {
       return { error: `Ошибка: ${error.message}` }
     }
     console.log('[Supabase] insert success, row:', data)
+    fetch('/api/send-lead-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ full_name: full_name.trim(), phone: phone.trim(), form_source }),
+    }).catch(e => console.warn('[email] failed to send:', e))
     return { error: null }
   } catch (e) {
     console.error('[Supabase] unexpected error:', e)
