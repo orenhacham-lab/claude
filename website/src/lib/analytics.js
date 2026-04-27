@@ -17,6 +17,7 @@ export function pushConversionEvent(name, phone, form_source) {
       address: {
         first_name: parts[0] || '',
         last_name: parts.slice(1).join(' ') || '',
+        country: 'IL',
       },
     },
     full_name: name,
