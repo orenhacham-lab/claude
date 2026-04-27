@@ -181,13 +181,15 @@ export default function Hero({ lang = 'ru' }) {
 
           <a href="tel:054-2002707" style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
-            marginTop: '16px', color: 'rgba(255,255,255,0.75)', fontSize: '1rem',
-            fontWeight: 600, textDecoration: 'none', letterSpacing: '0.02em',
+            marginTop: '24px',
+            background: '#fff', color: '#0b1729',
+            padding: '11px 22px', borderRadius: '8px',
+            fontSize: '1rem', fontWeight: 700, textDecoration: 'none', letterSpacing: '0.01em',
           }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18.01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.07-.54a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
             </svg>
-            054-2002707
+            {he ? 'חייגו אליי — 054-2002707' : 'Позвоните мне — 054-2002707'}
           </a>
         </div>
       </div>
