@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'onboarding@resend.dev',
+      from: 'leads@law-giterman.co.il',
       to: 'doritgt@gmail.com',
       subject: `ליד חדש מהאתר — ${full_name}`,
       html: `
